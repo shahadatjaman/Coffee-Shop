@@ -1,11 +1,17 @@
-import { Button } from 'react-bootstrap';
+import Home from "./pages/Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { GlobalStyles } from "./Assets/styles/GlobalStyles";
+
 function App() {
   return (
-    <div>
-      <h2>
-        <Button>Buy Now</Button>
-      </h2>
-    </div>
+    <>
+      <GlobalStyles />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
