@@ -40,4 +40,11 @@ ul{
 .swiper-slide{
     background: transparent
 }
+.error {
+    border: 1px solid #dc3545;
+}
+.notload {
+    cursor: pointer;
+}
+
 `;

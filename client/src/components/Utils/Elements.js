@@ -16,8 +16,7 @@ export const Container = styled.div`
 `;
 export const Row = styled.div`
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+    flex-wrap: wrap;
   flex-direction: ${(props) => (props.direction ? "row-reverse" : "")};
   width: 100%;
 `;
@@ -66,10 +65,36 @@ export const TitleH6 = styled.h6`
 `;
 
 export const Button = styled.a`
-  background: #0250c5;
+  background: #EDCDBB;
   border-color: #0250c5;
   color: #fff;
   padding: 10px 30px;
   border-radius: 4px;
   cursor: pointer;
 `;
+
+export const Form = styled.form``
+
+export const InptGroup = styled.div`
+ margin-bottom: 1rem;
+`
+
+export const Label = styled.label`
+ margin-bottom: 1rem;
+ display: inline-block;
+ color: #4c4848;
+`
+
+export const Input = styled.input`
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 1rem;
+`
+
+export const FormTitle = styled.h2`
+ margin-top: 1rem;
+ margin-bottom: 1rem;
+ text-align: center;
+ color: #000000b0;
+`
+
