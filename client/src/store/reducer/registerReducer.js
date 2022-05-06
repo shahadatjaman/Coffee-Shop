@@ -7,7 +7,8 @@ const init = {
     isAuthenticated : false,
     product : {},
     loginError : {},
-    product_Loading : true
+    product_Loading : true,
+    isTakenEmail : ""
 }
 
 const authReducer = (state = init, action) => {
@@ -25,6 +26,7 @@ const authReducer = (state = init, action) => {
             ...state,
             error : action.payload.error,
             loading : action.payload.loading,
+            isTakenEmail : action.payload.isTakenEmail
         }
 
         case Types.LOADING : 
@@ -33,10 +35,11 @@ const authReducer = (state = init, action) => {
         }
 
         case Types.SET_USER : 
-
+        console.log(action.payload.user)
+    
          return {
              user : action.payload.user,
-             isAuthenticated : Object.keys(action.payload.user).length !== 0
+             isAuthenticated :  Object.keys(action.payload.user).length !== 0 && action.payload.user !== undefined
          }
 
        case Types.LOADING_PRODUCT : 

@@ -2,7 +2,7 @@ import {connect} from 'react-redux'
 
 import * as Types from "../../../store/types/types"
 
-import { Cart, Img, ProductWrapper, Image, CartContent, H4, Stars, Li, Prices, Price, Dis, Old, DisDiv, Sale,Span, Buttons, Button } from "./ProductsStyles";
+import { Cart, Img, ProductWrapper, Image, CartContent, H4, Stars, Li, Prices, Price, Dis, Old, DisDiv, Sale,Span, Buttons, Button, StarAndCart } from "./ProductsStyles";
 
 import { AiFillHeart } from "react-icons/ai";
 
@@ -24,7 +24,7 @@ const PopularProducts = ({auth,wishListAction,wishList}) => {
     }
 
   const {loading} = wishList
-  console.log(loading)
+
     return (
         <ProductWrapper>
             <Container>
@@ -52,7 +52,7 @@ const PopularProducts = ({auth,wishListAction,wishList}) => {
                                         {pro.discount}% of
                                     </Span>
                                 </DisDiv>
-                                <Buttons>
+                                {/* <Buttons>
                                     <Button onClick={() => wishadd(pro._id)}>
                                         
                                         {loading ? <ClipLoader /> : <AiFillHeart />}
@@ -63,12 +63,12 @@ const PopularProducts = ({auth,wishListAction,wishList}) => {
                                     <Button>
                                         <AiOutlineSwap />
                                     </Button>
-                                    <Button>
-                                        <AiOutlineShoppingCart />
-                                    </Button>
-                                </Buttons>
+                                    
+                                </Buttons> */}
                             </Image>
                             <CartContent>
+                                
+                                <StarAndCart>
                                 <Stars>
                                     <Li>
                                         <AiFillStar />
@@ -83,6 +83,10 @@ const PopularProducts = ({auth,wishListAction,wishList}) => {
                                     <AiFillStar />
                                     </Li>
                                 </Stars>
+                                <Button>
+                                        <AiOutlineShoppingCart />
+                                    </Button>
+                                </StarAndCart>
                                <H4>{pro.coffeeName} </H4>
                                <Prices>
                                    <Price>${pro.price}.00</Price>

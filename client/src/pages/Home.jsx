@@ -4,9 +4,10 @@ import Slider from "../components/Home/Slider";
 import CategorySlide from "../components/Home/CategoryItems/index";
 import PopularProducts from "../components/Home/PopularProducts/index";
 const Home = () => {
+
     return (
         <>
-         <Navbarr />
+         {/* <Navbarr isLogged={isLogged}/> */}
         <Slider/>
         <CategorySlide/>
         <PopularProducts />

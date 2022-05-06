@@ -15,21 +15,44 @@ import Login from "./components/Account/Login";
 
 import Register from "./components/Account/Register";
 
+import Account from "./components/Account/MyAccount/index";
+
 import {getProduct} from "./store/action/authAction"
+
+import PrivateRoute from "./PrivateRoute";
+import Navbar from "./components/Home/Navbar";
+import OutlerRoute from "./OutlerRoute";
 
 function App({getProduct, login}) {
   useEffect(() => {
     getProduct()
   })
-  const {isAuthenticated} = login
+
+  console.log(login)
   return (
     <>
       <GlobalStyles />
+      
       <Router>
+      <Navbar isLogged={login} />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/account/register" element={ <Register />} />
-          <Route path="/account/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/account/register" element={
+          <OutlerRoute dirLink="/">
+            <Register />
+          </OutlerRoute>
+        } />
+        <Route path="/account/login" element={
+        <OutlerRoute dirLink="/">
+          <Login />
+        </OutlerRoute>
+      } />
+        <Route  path="/account" element={
+        <PrivateRoute dirLink="/">
+          <Account />
+        </PrivateRoute>
+      }/>
+  
         </Routes>
       </Router>
     </>

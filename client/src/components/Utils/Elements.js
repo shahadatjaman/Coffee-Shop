@@ -65,7 +65,7 @@ export const TitleH6 = styled.h6`
 `;
 
 export const Button = styled.a`
-  background: #EDCDBB;
+  background: #ff5c01;
   border-color: #0250c5;
   color: #fff;
   padding: 10px 30px;

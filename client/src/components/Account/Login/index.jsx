@@ -38,7 +38,7 @@ class Login extends React.Component {
         e.preventDefault();
         const {email,password} = this.state;
      
-        this.props.authLogin({email,password})
+        this.props.authLogin({email,password}, this.props.history)
     }
 
     render(){
@@ -49,7 +49,7 @@ class Login extends React.Component {
         console.log(error)
         return (
             <>
-            <Navbar />
+            {/* <Navbar /> */}
             <Wrapper>
                 <Container>
                     <Row>

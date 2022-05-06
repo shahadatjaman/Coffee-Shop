@@ -7,7 +7,9 @@ import { Col, Container, Row, TitleH6 } from "../../Utils/Elements";
 
 import {Link} from "react-router-dom"
 
-const Navbar = () => {
+import { connect } from "react-redux";
+
+const Navbar = ({isLogged}) => {
 
     const [open, setOpen] = useState(false)
     const [sticky, setSticky] = useState(false)
@@ -32,8 +34,9 @@ const Navbar = () => {
    
     window.addEventListener('scroll', isHeaderSticky)
 
+    const {isAuthenticated} = isLogged
 
-
+   console.log(isAuthenticated)
     return (
         <>
         <Topbar>
@@ -46,22 +49,17 @@ const Navbar = () => {
                     </Col>
                     <Col w="50">
                         <UserAuth>
-                            <Login>Login </Login> 
-                            <Slash>
-                                
-                            </Slash> 
-                            <Login>  Register </Login>
-                            {/* <UserRegister>
-                                <Close>
-                                    <AiOutlineClose />
-                                </Close>
-                               <Ul>
-                                   <Li>Register</Li>
-                                   <Li>login</Li>
-                                   <Li>Wish List (0)</Li>
-                                   <Li>Shopping Cart (0)</Li>
-                               </Ul>
-                            </UserRegister> */}
+                           {isAuthenticated ? (
+                                <Login to="/account">  My Account </Login>
+                           ) : (
+                               <>
+                               <Login to="/account/login">Login </Login> 
+                               <Slash>
+                                   
+                               </Slash> 
+                               <Login to="/account/register">  Register </Login>
+                               </>
+                           )}
                         </UserAuth>
                     </Col>
                 </Row>
@@ -125,4 +123,10 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+const mapStateToProps = state => {
+    return {
+        login : state.login
+    }
+}
+
+export default connect(mapStateToProps)(Navbar)

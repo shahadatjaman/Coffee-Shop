@@ -31,6 +31,12 @@ if (token) {
       user: decode,
     },
   });
+  store.dispatch({
+    type : Types.REGISTER,
+    payload : {
+      user : decode
+    }
+  })
 }
 
 root.render(

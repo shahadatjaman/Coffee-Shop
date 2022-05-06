@@ -5,7 +5,7 @@ import Axios from "axios";
 import decoder from "jwt-decode";
 
 
-export const authRegister = (user) => dispatch => {
+export const authRegister = (user,navigate) => dispatch => {
 
            dispatch({
                type : Types.LOADING,
@@ -29,23 +29,25 @@ export const authRegister = (user) => dispatch => {
                     user : decoded
                 }
             })
-            window.location.assign("/"); 
+            // window.location.assign("/"); 
+            navigate("/account")
          })
          .catch(error => {
-          
+             console.log(error.response.data.message !== undefined)
              dispatch({
                  type : Types.REGISTER_ERROR,
                  payload : {
                      error : error.response.data,
                      loading : false,
-                     res : error.response
+                     isTakenEmail : error.response.data.message ? error.response.data.message : null
                  }
              })
 
          })
 }
 
-export const authLogin = (user) => dispatch => {
+export const authLogin = (user,history) => dispatch => {
+    console.log(history)
     Axios.post('/api/user/login', user)
          .then(res => {
             const token = res.data.token
@@ -59,7 +61,7 @@ export const authLogin = (user) => dispatch => {
                     user : decoded
                 }
             })
-            window.location.assign("/"); 
+            history.push("/"); 
          })
          .catch(error => {
              
@@ -80,6 +82,17 @@ export const authLogin = (user) => dispatch => {
          })
 }
 
+export const logout = (Navigate) => dispatch => {
+    console.log(Navigate)
+   localStorage.removeItem("auth_token")
+   dispatch({
+       type : Types.SET_USER,
+       payload : {
+           user : {}
+       }
+   });
+   <Navigate to="/accoutn/login" />
+}
 export const getProduct = () => dispatch => {
   
     dispatch({

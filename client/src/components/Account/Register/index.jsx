@@ -4,69 +4,71 @@ import { Dir, LeftMenu, Li,Button, MenuBody, MenuTitle, Wrapper, Title, Ul, Text
 import {connect} from "react-redux"
 
 
-import {NavLink} from 'react-router-dom'
+import {NavLink, useNavigate} from 'react-router-dom'
 
 import {Container, Row, Col, InptGroup, Label, Input, FormTitle, Form} from "../../Utils/Elements"
 
-import React from "react";
+import React, {useState} from "react";
 
-import Navbar from "../../Home/Navbar/index";
+import Validation from "./Validation";
 
 import { authRegister } from "../../../store/action/authAction";
 
 
 
-class Register extends React.Component {
+const Register = ({auth,authRegister}) => {
 
-    state = {
-        firstName : "",
-        lastName : "",
-        email : "",
-        phone : "",
-        password : "",
-        confirmpassword : "",
-        error : {},
-        isError : false
-    }
-
-    static getDerivedStateFromProps(nextProps, prevProps){
-        
-        if(JSON.stringify(nextProps.auth.error) !== JSON.stringify(prevProps.error)){
-           return nextProps.auth
-        }
-        return null
-    }
-   
-    changeHandler = (e) => {
-        this.setState({
-        [e.target.name] : e.target.value,
-        error : this.props.auth
-       })
-    }
-
+    const initialState = {firstName : "", lastName : "", email : "", phone : "", password : "", confirmpassword : ""}
     
-    formHandler = e => {
-        e.preventDefault()
-        const {firstName, lastName, email, phone, password, confirmpassword} = this.state
-        this.props.authRegister({
-            firstName,
-            lastName,
-            email,
-            phone,
-            password,
-            confirmpassword,
-            
-        })
-        // window.history.replaceState(null, document.title, "/")
-    }
-    render(){
-        const {firstName, lastName, email, phone, password, confirmpassword, error} = this.state
+    const [formValues, setFormValues] = useState(initialState)
 
-        const {loading, isTaken} = this.props.auth
-     
+    const [formErrors, setFormErrors] = useState({});
+   
+
+
+    const changeHandler = (e) => {
+         const {name, value} = e.target
+         setFormValues({...formValues, [name] : value})
+    }
+    const navigate = useNavigate()
+    const formHandler = (e) => {
+        e.preventDefault()
+        setFormErrors(validator(formValues))
+        authRegister(formValues,navigate)
+       
+    }
+
+    const validator = (values) => {
+      console.log(values)
+     const error = {};
+     console.log(error)
+
+    if(!values.firstName){
+        error.firstName = "Enter  your First Name!"
+    }
+    if(!values.lastName){
+        error.lastName = "Enter  your Last Name!"
+    }
+    if(!values.email){
+        error.email = "Enter  your Email!"
+    }
+    if(!values.phone){
+        error.phone = "Enter  your Phone Number!"
+    }
+    if(!values.password){
+        error.password = "Enter  your Password!"
+    }
+    if(!values.confirmpassword){
+        error.confirmpassword = "Confirm Password Required!"
+    }else if(values.confirmpassword !== values.password){
+        error.confirmpassword = "Password isn't same!!"
+    }
+    return error
+    }
+ 
         return (
             <>
-            <Navbar />
+            {/* <Navbar /> */}
             <Wrapper>
                 <Container>
                     <Row>
@@ -111,7 +113,7 @@ class Register extends React.Component {
                            <FormTitle>
                             Register Account
                            </FormTitle>
-                          <Form onSubmit={this.formHandler}>
+                          <Form onSubmit={formHandler}>
                           <InptGroup>
                                <Label>
                                    Firsr Name :
@@ -121,12 +123,12 @@ class Register extends React.Component {
                                  name="firstName"
                                 
                                  placeholder="First Name" 
-                                 onChange={this.changeHandler }
-                                 value={firstName}
-                                 className={error.firstName ? "error" : ""}
+                                 onChange={changeHandler }
+                                 value={formValues.firstName}
+                                 className={formErrors.firstName ? "error" : ""}
                                  />
                                  <Text>
-                                     {error.firstName}
+                                     {formErrors.firstName}
                                  </Text>
 
                            </InptGroup>
@@ -137,14 +139,14 @@ class Register extends React.Component {
                                <Input 
                                type="text"
                                name="lastName"
-                               className={error.lastName ? "error" : ""}
-                               value={lastName}
+                               className={formErrors.lastName ? "error" : ""}
+                               value={formValues.lastName}
                                placeholder="Last Name"
-                               onChange={this.changeHandler }
+                               onChange={changeHandler }
                                />
                                <Text>
-                                     {error.lastName}
-                                 </Text>
+                                     {formErrors.lastName}
+                               </Text>
                            </InptGroup>
                            <InptGroup>
                                <Label>
@@ -153,16 +155,16 @@ class Register extends React.Component {
                                <Input 
                                type="eamil"
                                name="email"
-                               className={error.email ? "error" : ""}
-                               value={email}
+                               className={formErrors.email ? "error" : ""}
+                               value={formValues.email}
                                placeholder="Email" 
-                               onChange={this.changeHandler }
+                               onChange={changeHandler }
                                />
                                <Text>
-                                     {error.email}
-                                 </Text>
+                                     {formErrors.email}
+                               </Text>
                                  <Text>
-                                     {isTaken ? "Email Taken" : ""}
+                                     {auth.isTakenEmail ? "Email Taken" : ""}
                                  </Text>
                            </InptGroup>
                            <InptGroup>
@@ -172,13 +174,13 @@ class Register extends React.Component {
                                <Input 
                                type="text"
                                name="phone"
-                               className={error.phone ? "error" : ""}
-                               value={phone}
+                               className={formErrors.phone ? "error" : ""}
+                               value={formValues.phone}
                                placeholder="Phone" 
-                               onChange={this.changeHandler }
+                               onChange={changeHandler }
                                />
                                <Text>
-                                     {error.phone}
+                                     {formErrors.phone}
                                  </Text>
                            </InptGroup>
                            <InptGroup>
@@ -188,14 +190,14 @@ class Register extends React.Component {
                                <Input 
                                type="text"
                                name="password"
-                               className={error.password ? "error" : ""}
-                               value={password}
+                               className={formErrors.password ? "error" : ""}
+                               value={formValues.password}
                                placeholder="Password" 
-                               onChange={this.changeHandler }
+                               onChange={changeHandler }
                                />
                                <Text>
-                                     {error.password}
-                                 </Text>
+                                     {formErrors.password}
+                                </Text>
                            </InptGroup>
                            <InptGroup>
                                <Label>
@@ -204,16 +206,16 @@ class Register extends React.Component {
                                <Input 
                                type="text"
                                name="confirmpassword"
-                               className={error.confirmpassword ? "error" : ""}
-                               value={confirmpassword}
+                               className={formErrors.confirmpassword ? "error" : ""}
+                               value={formValues.confirmpassword}
                                placeholder=" Confirm Password" 
-                               onChange={this.changeHandler }
+                               onChange={changeHandler }
                                />
                                <Text>
-                                     {error.confirmpassword}
+                                     {formErrors.confirmpassword}
                                  </Text>
                            </InptGroup>
-                           {loading ? (<Button disabled type="submit">Register</Button>) : (<Button className={loading ? "" : "notload"} type="submit">Register</Button>)}
+                           <Button type="submit">Register</Button>
                           </Form>
     
                        </Col>
@@ -222,7 +224,6 @@ class Register extends React.Component {
             </Wrapper>
             </>
         );
-    }
 }
 
 const mapStateToProps = state => {
@@ -232,5 +233,5 @@ const mapStateToProps = state => {
    }
 }
 
-export default connect(mapStateToProps, {authRegister})(Register);
+export default connect(mapStateToProps, {authRegister,Validation})(Register);
 

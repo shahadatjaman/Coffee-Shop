@@ -120,3 +120,10 @@ export const Button = styled.button`
       }
   }
 `
+
+export const StarAndCart = styled.div`
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+`

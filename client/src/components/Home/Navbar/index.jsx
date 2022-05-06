@@ -3,13 +3,19 @@ import { useEffect, useState } from "react";
 import { Nav,NavbarContainer, NavbarMenu, NavItem, NavLogo, NavLink, MenuIcon, Topbar, UserAuth, Login, Slash, UserActivity, Wishlist, AddToCart, Span} from "./NavbarElements";
 import { FaAlignJustify,FaHeart,FaWeightHanging } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
-import { Col, Container, Row, TitleH6 } from "../../Utils/Elements";
+import { Button, Col, Container, Row, TitleH6 } from "../../Utils/Elements";
 import { Link } from "react-router-dom";
-const Navbar = () => {
+import {connect} from "react-redux"
 
+import {logout} from "../../../store/action/authAction"
+
+import {Navigate} from 'react-router-dom'
+
+const Navbar = ({auth,isLogged,logout}) => {
+    console.log(isLogged.isAuthenticated)
     const [open, setOpen] = useState(false)
     const [sticky, setSticky] = useState(false)
-
+    
 
     const isOpen = () => {
         setOpen(true)
@@ -30,8 +36,9 @@ const Navbar = () => {
    
     window.addEventListener('scroll', isHeaderSticky)
 
-
-
+      useEffect(() => {
+          console.log('Components did mount')
+      }, [])
     return (
         <>
         <Topbar>
@@ -44,23 +51,27 @@ const Navbar = () => {
                     </Col>
                     <Col w="50">
                         <UserAuth>
-                            {/* <Login>Login </Login>  */}
-                            <Link to="/account/login">  Login </Link>
-                            <Slash>
-                                
-                            </Slash> 
-                            <Link to="/account/register">  Register </Link>
-                            {/* <UserRegister>
-                                <Close>
-                                    <AiOutlineClose />
-                                </Close>
-                               <Ul>
-                                   <Li>Register</Li>
-                                   <Li>login</Li>
-                                   <Li>Wish List (0)</Li>
-                                   <Li>Shopping Cart (0)</Li>
-                               </Ul>
-                            </UserRegister> */}
+                          
+                            {isLogged.isAuthenticated ? (
+                               <>
+                               <Button onClick={() => {
+                                   logout(Navigate)
+                               }}>Logout</Button>
+                               <Slash>
+                                   
+                                   </Slash> 
+                                 <Link to="/account">  My Account </Link>
+                                </>
+                            ) : (
+                                <>
+                               <NavLink to="/account/login">Login </NavLink> 
+                               <Slash>
+                                   
+                               </Slash> 
+                               <NavLink to="/account/register">  Registerr </NavLink>
+                               </>
+                            )}
+    
                         </UserAuth>
                     </Col>
                 </Row>
@@ -124,4 +135,10 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+const mapStateToProps = state => {
+    return {
+        auth : state.auth
+    }
+}
+
+export default connect(mapStateToProps,{logout})(Navbar)
