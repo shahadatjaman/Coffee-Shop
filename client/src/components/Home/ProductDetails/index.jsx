@@ -1,33 +1,95 @@
-// import React from 'react';
-// import styled from 'styled-components';
-// import PropTypes from 'prop-types';
+import {useEffect, useState} from "react"
 
-// // #region constants
+import {NavLink,useParams} from 'react-router-dom'
 
-// // #endregion
+import {connect} from "react-redux"
 
-// // #region styled-components
+import { Image, Img, Name,ProductName, ProductDetailsWrapper, Info, Ul, Li, Span, Prices, OldPrice, Price } from "./ProductDetailsStyles";
 
-// // #endregion
+import {Container, Row, Col, Loading, Button} from "../../Utils/Elements"
 
-// // #region functions
+import one from "../../../Assets/Images/one.jpg"
 
-// // #endregion
+import { Dir } from "../../Account/MyAccount/AccountStyles";
 
-// // #region component
-// const propTypes = {};
+import { productAction } from '../../../store/action/productAction';
 
-// const defaultProps = {};
+const ProductDetails = ({productAction,product}) => {
 
-// /**
-//  * 
-//  */
-// const index = () => {
-//     return <div></div>;
-// }
+    const productId = useParams()
+    
+  
+    useEffect(() => {
+        productAction(productId)
+    },[productId,productAction])
 
-// index.propTypes = propTypes;
-// index.defaultProps = defaultProps;
-// // #endregion
+    const data = product.product
 
-// export default index;
+    
+    const {loading} = product
+
+        
+
+    return loading ? (
+        <Loading>
+            <h3>Loading</h3>
+        </Loading>
+    ) : (
+        <>
+         <ProductDetailsWrapper>
+            <Container>
+                <Row>
+                    <Col w="100">
+                        <Dir>
+                        <NavLink to="/">Home | </NavLink>
+                              
+                        </Dir>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col w="40">
+                       {data.avatar  !== undefined && (
+                            <Image>
+                            <Img src={require(`../../../Assets/Images/${data.avatar === undefined ? "" : data.avatar}`)} alt="one" />
+                        </Image>
+                       ) }
+                        
+                    </Col>
+                    <Col w="60">
+                        <ProductName>
+                            <Name>{data.coffeeName}</Name>
+                        </ProductName>
+                        <Info>
+                            <Ul>
+                                <Li>
+                                    Brand : 
+                                 <Span>Apple</Span>
+                                </Li>
+                                <Li>
+                                Availability :  
+                                <Span>In Stock</Span>
+                                </Li>
+                            </Ul>
+                        </Info>
+                        <Prices>
+                            <OldPrice>${data.oldPrice}.20</OldPrice>
+                            <Price>${data.price}.00</Price>
+                        </Prices>
+
+                        <Button color="#fff" bg="#5C3D2E">Add To Cart</Button>
+                    </Col>
+                </Row>
+            </Container>
+         </ProductDetailsWrapper>
+        </>
+    );
+}
+
+const mapStateToProps = state => {
+    console.log(state)
+    return {
+        product : state.product
+    }
+}
+
+export default connect(mapStateToProps, {productAction})(ProductDetails);

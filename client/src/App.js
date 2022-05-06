@@ -22,13 +22,13 @@ import {getProduct} from "./store/action/authAction"
 import PrivateRoute from "./PrivateRoute";
 import Navbar from "./components/Home/Navbar";
 import OutlerRoute from "./OutlerRoute";
+import ProductDetails from "./components/Home/ProductDetails";
 
 function App({getProduct, login}) {
   useEffect(() => {
     getProduct()
-  })
+  },[])
 
-  console.log(login)
   return (
     <>
       <GlobalStyles />
@@ -52,7 +52,7 @@ function App({getProduct, login}) {
           <Account />
         </PrivateRoute>
       }/>
-  
+        <Route path="/product/:id" element={<ProductDetails />} />
         </Routes>
       </Router>
     </>

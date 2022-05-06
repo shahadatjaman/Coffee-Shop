@@ -8,22 +8,19 @@ import { AiFillHeart } from "react-icons/ai";
 
 import {Container, Row, Col, Title, TitleH1} from "../../Utils/Elements"
 
-import { wishListAction } from '../../../store/action/wishListAction';
 
 import { AiFillStar,AiOutlineEye,AiOutlineSwap,AiOutlineShoppingCart } from "react-icons/ai";
 
 import ClipLoader from "react-spinners/ClipLoader";
+import { Link } from 'react-router-dom';
 
-const PopularProducts = ({auth,wishListAction,wishList}) => {
+const PopularProducts = ({auth}) => {
    
     
     const { product} = auth
     
-    const wishadd = (id) => {
-        wishListAction(id)
-    }
 
-  const {loading} = wishList
+
 
     return (
         <ProductWrapper>
@@ -45,7 +42,9 @@ const PopularProducts = ({auth,wishListAction,wishList}) => {
                         <Col w="25" md="50" sm="100" key={index}>
                         <Cart>
                             <Image>
-                                <Img src={require(`../../../Assets/Images/${pro.avatar}`)} alt="one"/>
+                                <Link to={`/product/${pro._id}`}>
+                                  <Img src={require(`../../../Assets/Images/${pro.avatar}`)} alt="one"/>
+                                </Link>
                                  
                                 <DisDiv>
                                     <Span>
@@ -107,9 +106,8 @@ const PopularProducts = ({auth,wishListAction,wishList}) => {
 
 const mapStateToProps = (state)=> {
     return {
-        auth : state.auth,
-        wishList : state.wishList
+        auth : state.auth
     }
 }
 
-export default connect(mapStateToProps, {wishListAction})(PopularProducts);
+export default connect(mapStateToProps)(PopularProducts);

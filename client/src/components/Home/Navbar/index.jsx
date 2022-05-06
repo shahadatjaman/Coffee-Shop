@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Nav,NavbarContainer, NavbarMenu, NavItem, NavLogo, NavLink, MenuIcon, Topbar, UserAuth, Login, Slash, UserActivity, Wishlist, AddToCart, Span} from "./NavbarElements";
+import { Nav,NavbarContainer, NavbarMenu, NavItem, NavLogo, NavLink, MenuIcon, Topbar, UserAuth, Login, Slash, UserActivity, Wishlist, AddToCart, Span, MyAccount} from "./NavbarElements";
 import { FaAlignJustify,FaHeart,FaWeightHanging } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { Button, Col, Container, Row, TitleH6 } from "../../Utils/Elements";
@@ -12,7 +12,7 @@ import {logout} from "../../../store/action/authAction"
 import {Navigate} from 'react-router-dom'
 
 const Navbar = ({auth,isLogged,logout}) => {
-    console.log(isLogged.isAuthenticated)
+
     const [open, setOpen] = useState(false)
     const [sticky, setSticky] = useState(false)
     
@@ -36,9 +36,6 @@ const Navbar = ({auth,isLogged,logout}) => {
    
     window.addEventListener('scroll', isHeaderSticky)
 
-      useEffect(() => {
-          console.log('Components did mount')
-      }, [])
     return (
         <>
         <Topbar>
@@ -46,7 +43,7 @@ const Navbar = ({auth,isLogged,logout}) => {
                 <Row>
                     <Col w="50">
                         <TitleH6>
-                        Get Special 27% Discount On Ice Cream Cone
+                          Get Special 27% Discount On Ice Cream Cone
                         </TitleH6>
                     </Col>
                     <Col w="50">
@@ -54,13 +51,18 @@ const Navbar = ({auth,isLogged,logout}) => {
                           
                             {isLogged.isAuthenticated ? (
                                <>
-                               <Button onClick={() => {
+                               <Button color="#000" bg="#fff" onClick={() => {
                                    logout(Navigate)
                                }}>Logout</Button>
                                <Slash>
                                    
                                    </Slash> 
-                                 <Link to="/account">  My Account </Link>
+                                 <Link to="/account">
+                                       
+                                       <MyAccount>
+                                           My Account
+                                       </MyAccount>
+                                 </Link>
                                 </>
                             ) : (
                                 <>

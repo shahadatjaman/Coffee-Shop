@@ -9,10 +9,10 @@ export const Nav = styled.div`
   z-index: 99;
   transition: 0.5s;
   @media (max-width: 991px) {
-    background: #EDCDBB;
+    background: #5C3D2E;
     z-index: 99;
   }
-  background: ${(props) => (props.issticky ? "#EDCDBB" : "#EDCDBB")};
+  background: #5C3D2E;
   box-shadow: ${(props) =>
     props.issticky ? "0px 5px 20px rgb(0 0 0 / 15%)" : null};
   /* position: ${(props) => (props.issticky ? "fixed" : "absolute")}; */
@@ -35,9 +35,9 @@ export const NavbarContainer = styled.div`
 export const NavLogo = styled(NavLinks)`
   font-size: 32px;
   font-weight: 600;
-  color: ${(props) => (props.issticky ? "#000" : "#000")};
+  color: #fff;
   @media (max-width: 991px) {
-    color: #000;
+    color: #fff;
   }
 `;
 
@@ -83,7 +83,7 @@ export const NavLink = styled(HashLink)`
   font-size: 16px;
   margin-left: 2rem;
   font-weight: 400;
-  color: ${(props) => (props.issticky ? "#000" : "#000")};
+  color: #fff;
   @media (max-width: 991px) {
     margin-bottom: 1rem;
     font-weight: 500;
@@ -93,7 +93,7 @@ export const NavLink = styled(HashLink)`
 
 
 export const Topbar = styled.div`
- background: #EDCDBB;
+ background: #5C3D2E;
  border-bottom: 1px solid #837d7d54;
 padding: 1rem 0;
 
@@ -198,3 +198,7 @@ export const Li = styled.li`
 `
 
 export const Close = styled.span``
+
+export const MyAccount = styled.span`
+ color: #fff;
+`

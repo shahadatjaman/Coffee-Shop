@@ -4,12 +4,12 @@ import registerReducer from "./registerReducer";
 
 import loginReducer from "./loginReducer";
 
-import WishListReducer from "../reducer/wishReducer"
+import ProductReducer from "./ProductReducer.js";
 
 const rootReducer = combineReducers({
     auth : registerReducer,
     login : loginReducer,
-    wishList : WishListReducer
+    product : ProductReducer
 })
 
 export default rootReducer

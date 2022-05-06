@@ -238,7 +238,24 @@ module.exports = {
                             message : "Server Error Occurred!"
                         })
                     })
-    }
+    },
+    
+    product(req, res){
+        const {id} = req.params
 
+        ProductModel.findOne({_id : id})
+                    .then(data => {
+                      res.status(200).json({
+                          product : data
+                      })
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                       res.status(500).json({
+                           message : "There was an sercer error!"
+                       })
+                    })
+
+    }
        
 }

@@ -39,9 +39,8 @@ const Register = ({auth,authRegister}) => {
     }
 
     const validator = (values) => {
-      console.log(values)
+
      const error = {};
-     console.log(error)
 
     if(!values.firstName){
         error.firstName = "Enter  your First Name!"

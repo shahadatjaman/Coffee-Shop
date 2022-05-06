@@ -55,7 +55,7 @@ export const TitleH1 = styled.h1`
 export const TitleH6 = styled.h6`
   max-width: 650px;
   margin: 0 auto;
-  color: #555;
+  color: #fff;
   font-weight: 400;
   line-height: 1.625;
   color: ${(props) => props.color};
@@ -65,9 +65,9 @@ export const TitleH6 = styled.h6`
 `;
 
 export const Button = styled.a`
-  background: #ff5c01;
+  background: ${(props) => props.bg};
   border-color: #0250c5;
-  color: #fff;
+  color: ${(props) => props.color};
   padding: 10px 30px;
   border-radius: 4px;
   cursor: pointer;
@@ -98,3 +98,10 @@ export const FormTitle = styled.h2`
  color: #000000b0;
 `
 
+export const Loading = styled.div`
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;

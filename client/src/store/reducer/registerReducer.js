@@ -35,8 +35,7 @@ const authReducer = (state = init, action) => {
         }
 
         case Types.SET_USER : 
-        console.log(action.payload.user)
-    
+
          return {
              user : action.payload.user,
              isAuthenticated :  Object.keys(action.payload.user).length !== 0 && action.payload.user !== undefined
