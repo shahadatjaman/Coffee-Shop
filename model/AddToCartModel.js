@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const WishListModel = mongoose.Schema({
+const AddToCart = mongoose.Schema({
     coffeeName : {
         type : String,
         trim : true,
@@ -20,12 +20,11 @@ const WishListModel = mongoose.Schema({
     createdAt  : String,
     author : mongoose.Schema.Types.ObjectId,
     productId :  mongoose.Schema.Types.ObjectId,
-    wishListCount : Number,
 
 })
 
 
-const WishModel = mongoose.model("Wish", WishListModel)
+const AddCart = mongoose.model("Cart", AddToCart)
 
 
-module.exports = WishModel
+module.exports = AddCart

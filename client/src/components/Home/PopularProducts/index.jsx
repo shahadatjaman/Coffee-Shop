@@ -1,26 +1,35 @@
+import {Navigate, useNavigate} from "react-router-dom"
+
 import {connect} from 'react-redux'
 
-import * as Types from "../../../store/types/types"
+import toast, { Toaster } from 'react-hot-toast';
 
 import { Cart, Img, ProductWrapper, Image, CartContent, H4, Stars, Li, Prices, Price, Dis, Old, DisDiv, Sale,Span, Buttons, Button, StarAndCart } from "./ProductsStyles";
 
-import { AiFillHeart } from "react-icons/ai";
 
 import {Container, Row, Col, Title, TitleH1} from "../../Utils/Elements"
 
 
-import { AiFillStar,AiOutlineEye,AiOutlineSwap,AiOutlineShoppingCart } from "react-icons/ai";
+import { AiFillStar,AiOutlineShoppingCart } from "react-icons/ai";
 
-import ClipLoader from "react-spinners/ClipLoader";
 import { Link } from 'react-router-dom';
 
-const PopularProducts = ({auth}) => {
-   
+import { addToCartAction } from '../../../store/action/cartAction';
+
+const PopularProducts = ({auth,addToCartAction,login}) => {
+
+    const navigate = useNavigate()
     
     const { product} = auth
-    
 
-
+    const addCart = (id) => {
+        if(!login.isAuthenticated){
+           return navigate("/account/login")
+        }else{
+       addToCartAction(id)
+        }
+        // addToCartAction(id)
+    }
 
     return (
         <ProductWrapper>
@@ -82,9 +91,9 @@ const PopularProducts = ({auth}) => {
                                     <AiFillStar />
                                     </Li>
                                 </Stars>
-                                <Button>
+                                <Button onClick={() => addCart(pro._id)}>
                                         <AiOutlineShoppingCart />
-                                    </Button>
+                                 </Button>
                                 </StarAndCart>
                                <H4>{pro.coffeeName} </H4>
                                <Prices>
@@ -93,6 +102,18 @@ const PopularProducts = ({auth}) => {
                                    <Old>${pro.oldPrice}.00</Old>
                                </Prices>
                             </CartContent>
+                            <Toaster  
+                            position="bottom-left"
+                            reverseOrder={false}
+                            toastOptions={{
+                                className: '',
+                                style: {
+                                  border: '1px solid #ddd',
+                                  padding: '16px',
+                                  boxShadow : 'none'
+                                },
+                              }}
+                            />
                         </Cart>
                     </Col>
                        )
@@ -106,8 +127,9 @@ const PopularProducts = ({auth}) => {
 
 const mapStateToProps = (state)=> {
     return {
-        auth : state.auth
+        auth : state.auth,
+        login : state.login
     }
 }
 
-export default connect(mapStateToProps)(PopularProducts);
+export default connect(mapStateToProps, {addToCartAction})(PopularProducts);

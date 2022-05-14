@@ -86,7 +86,7 @@ const ProductDetails = ({productAction,product}) => {
 }
 
 const mapStateToProps = state => {
-    console.log(state)
+
     return {
         product : state.product
     }

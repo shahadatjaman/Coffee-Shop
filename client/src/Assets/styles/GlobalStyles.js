@@ -7,14 +7,23 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
 }
 body{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
 }
 a{
     text-decoration: none;
     color: #000;
     display: inline-block;
 }
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,a{
+    font-family: 'Lato', sans-serif;
+}
 button{
     border: none;
     background: transparent;
@@ -46,5 +55,8 @@ ul{
 .notload {
     cursor: pointer;
 }
-
+.notiLogin{
+    margin-left: 4px;
+    font-weight: 800;
+}
 `;

@@ -4,7 +4,7 @@ export const Container = styled.div`
   /* display: flex; */
   justify-content: space-between;
   align-items: center;
-  max-width: 1140px;
+  max-width: 1230px;
   margin: auto;
   margin: ${(props) => (props.margin ? "55px auto" : "auto")};
   position: relative;

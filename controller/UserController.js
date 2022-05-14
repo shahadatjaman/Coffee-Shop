@@ -8,7 +8,7 @@ const {PRIVET_KEY} = require('../config')
 
 const ProductModel = require("../model/CreateProductModel")
 
-const WishModel = require('../model/WishListModel')
+const AddCart = require('../model/AddToCartModel')
 
 const RegisterValidaion = require('../Validator/registerValidation')
 
@@ -154,14 +154,14 @@ module.exports = {
                 })
             })
     },
-    createWishList(req, res){
+    createAddToCart(req, res){
       const produId = req.params.id
       const userId = req.user._id
       ProductModel.findById(produId)
                   .then(data => {
 
 
-                      WishModel.findOne({productId : produId})
+                    AddCart.findOne({productId : produId})
                                .then(result => {
                                 
 
@@ -172,7 +172,7 @@ module.exports = {
                                 }
                                    
                                 
-                                const newWish = new WishModel({
+                                const newCart = new AddCart({
                                     coffeeName : data.coffeeName,
                                     price : data.price,
                                     oldPrice : data.oldPrice,
@@ -182,7 +182,7 @@ module.exports = {
                                     productId : data._id,
 
                                 })
-                                newWish.save()
+                                newCart.save()
                                        .then(result2 =>{
                                          const updateduser = {...req.user._doc}
                                           updateduser.wishList.push(result2._id)
@@ -190,8 +190,8 @@ module.exports = {
                                           User.findByIdAndUpdate(updateduser._id, {$set : updateduser}, {new : true})
                                           .then(user => {
                                                res.status(200).json({
-                                                   message : "Added you Wishlist",
-                                                   user : user
+                                                   message : "Added",
+                                                   user : result2
                                                })
                                           })
                                           .catch(error => {
@@ -223,8 +223,19 @@ module.exports = {
                   })
 
     },
-    getWishList(req, res){
-
+    getCart(req, res){
+        const userId = req.user._id
+      AddCart.find({author : userId})
+             .then(data => {
+                res.status(200).json({
+                    cart : data
+                })
+             })
+             .catch(error => {
+                res.status(500).json({
+                    message : "There was an server error"
+                }) 
+             })
     },
     getProduct(req, res){
         ProductModel.find()

@@ -47,7 +47,11 @@ class Account extends React.Component {
                                        <Li>
                                         <NavLink to="/account">My Account </NavLink>
                                        </Li>
-                                       <Li>Wish List</Li>
+                                       <Li>
+                                           <NavLink to="/account/cart">
+                                           Cart List
+                                           </NavLink>
+                                       </Li>
                                        <Li>Order History</Li>
                                    </Ul>
                                </MenuBody>

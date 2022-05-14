@@ -25,9 +25,10 @@ export const MenuBody = styled.div`
 `
 
 export const MenuTitle = styled.div`
- background: #EDCDBB;
+ background: #5C3D2E;
  padding: 1rem;
  margin-bottom: 4px;
+ color: #fff;
 `
 
 export const Title = styled.h3``
@@ -41,11 +42,12 @@ export const Li = styled.li`
 `
 
 export const Button = styled.button`
-  background: #EDCDBB;
+  background: #5C3D2E;
   border-color: #0250c5;
   color: #fff;
   padding: 10px 30px;
   border-radius: 4px;
+  cursor: pointer;
 `
 
 export const Text = styled.p`

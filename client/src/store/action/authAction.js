@@ -4,6 +4,7 @@ import Axios from "axios";
 
 import decoder from "jwt-decode";
 
+import toast, { Toaster } from 'react-hot-toast';
 
 export const authRegister = (user,navigate) => dispatch => {
 
@@ -95,6 +96,7 @@ export const logout = (Navigate) => dispatch => {
 }
 export const getProduct = () => dispatch => {
   
+    
     dispatch({
         type : Types.LOADING_PRODUCT ,
         payload : {

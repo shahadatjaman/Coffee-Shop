@@ -23,6 +23,7 @@ import PrivateRoute from "./PrivateRoute";
 import Navbar from "./components/Home/Navbar";
 import OutlerRoute from "./OutlerRoute";
 import ProductDetails from "./components/Home/ProductDetails";
+import AddToCart from "./components/Account/Cart";
 
 function App({getProduct, login}) {
   useEffect(() => {
@@ -50,6 +51,11 @@ function App({getProduct, login}) {
         <Route  path="/account" element={
         <PrivateRoute dirLink="/">
           <Account />
+        </PrivateRoute>
+      }/>
+      <Route  path="/account/cart" element={
+        <PrivateRoute dirLink="/account/login">
+          <AddToCart />
         </PrivateRoute>
       }/>
         <Route path="/product/:id" element={<ProductDetails />} />

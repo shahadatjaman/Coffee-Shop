@@ -108,9 +108,10 @@ export const Buttons = styled.div`
 export const Button = styled.button`
   width: 40px;
   height: 40px;
-  background: #FFEDDB;
+  background: #5C3D2E;
   border-radius: 50%;
   margin-bottom: 5px;
+  color: #fff;
   cursor: pointer;
 
   &&:hover{
