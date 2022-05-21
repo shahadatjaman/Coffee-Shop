@@ -7,17 +7,17 @@ const ProductModell = new mongoose.Schema({
         required : true
     },
     price : {
-        type : String,
+        type : Number,
         trim : true,
         required : true
     },
     oldPrice  : {
-        type : String,
+        type : Number,
         trim : true,
         required : true
     },
     discount : {
-        type : String,
+        type : Number,
         trim : true,
         required : true
     },

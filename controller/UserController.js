@@ -52,7 +52,9 @@ module.exports = {
                             email,
                             phone,
                             password : hash,
-                            wishList : []
+                            cartList : [],
+                            cartCount : 0,
+                            cartTotallPrice : 0
                         })
 
                         
@@ -121,7 +123,8 @@ module.exports = {
                             _id : user._id,
                             email,
                             firstName : user.firstName,
-                            lastName : user.lastName  
+                            lastName : user.lastName
+
                         },PRIVET_KEY, {expiresIn : "72h"})
           
                      res.status(200).json({
@@ -155,93 +158,150 @@ module.exports = {
             })
     },
     createAddToCart(req, res){
-      const produId = req.params.id
-      const userId = req.user._id
-      ProductModel.findById(produId)
-                  .then(data => {
+        
+      const productId = req.params.id
+      const author = req.user._id
+         
+      ProductModel.findById({_id : productId})
+                  .then(product => {
+
+                    const isAddToCart = req.user._doc.CartList.includes(productId)
+                            
+                       if(isAddToCart){
+                           // save cart item
+                          AddCart.findOne({productId})
+                                 .then(cart => {
+                                   const updatedUser = {...req.user._doc};
 
 
-                    AddCart.findOne({productId : produId})
-                               .then(result => {
-                                
+                                         updatedUser.cartCount = updatedUser.cartCount + 1;
 
-                                if(result){
-                                    return res.status(200).json({
-                                        message : "Already added!"
-                                    })
-                                }
-                                   
-                                
-                                const newCart = new AddCart({
-                                    coffeeName : data.coffeeName,
-                                    price : data.price,
-                                    oldPrice : data.oldPrice,
-                                    avatar : data.avatar,
-                                    createdAt : data.createdAt,
-                                    author : userId,
-                                    productId : data._id,
+                                         updatedUser.cartTotallPrice = updatedUser.cartTotallPrice + cart.price;
 
-                                })
-                                newCart.save()
-                                       .then(result2 =>{
-                                         const updateduser = {...req.user._doc}
-                                          updateduser.wishList.push(result2._id)
+                                         updatedUser.tottalPrice = updatedUser.tottalPrice + cart.price
 
-                                          User.findByIdAndUpdate(updateduser._id, {$set : updateduser}, {new : true})
+                                         User.findByIdAndUpdate(author, {$set : updatedUser}, {new : true})
                                           .then(user => {
-                                               res.status(200).json({
-                                                   message : "Added",
-                                                   user : result2
-                                               })
+
+                                            const updatedCart = {...cart._doc}
+
+                                                 updatedCart.qty = updatedCart.qty + 1;
+
+                                                 updatedCart.tottalPrice = updatedCart.tottalPrice + cart.price
+
+                                            AddCart.findByIdAndUpdate(cart._id, {$set : updatedCart}, {new : true})
+                                                   .then(updatedCart => {
+
+                                                    const cartPrices = {
+                                                        cartCount : user.cartCount,
+                                                        totallPrice : user.cartTotallPrice,
+                                                      }
+                                                    res.status(200).json({
+                                                        cartPrices,
+                                                        updatedCart
+                                                    })
+                                                   })
+                                                   .catch(error => {
+                                                       console.log(error.message)
+                                                       res.status(500).json({
+                                                           message : "there was an server error!"
+                                                       })
+                                                   })
                                           })
                                           .catch(error => {
-                                            res.status(500).json({
-                                                message : "There was an server error"
-                                            })
+                                              res.status(500).json({
+                                                message : "Server error occurred!"
+                                              })
                                           })
-                                       })
+                                 })
+                                 .cart(error => {
+                                    res.status(500).json({
+                                        message : "Server error occurred!"
+                                    })
+                                 })
+                                  
+                       }else{
+                        // save cart item
+                        const newCart = new AddCart({
+                            name : product.coffeeName,
+                            price : product.price,
+                            oldPrice : product.oldPrice,
+                            avatar : product.avatar,
+                            author : author,
+                            productId : productId,
+                            qty : 1,
+                            tottalPrice : product.price
+                        })
 
-                                       .catch(err => {
-                                           console.log(err.message)
-                                        res.status(500).json({
-                                            message : "There was an server error"
+                        newCart.save()
+                               .then(cart => {
+
+                                // updated user
+                                  const updateduser = {...req.user._doc}
+                                        
+                                        updateduser.CartList.push(product._id)
+
+                                        updateduser.cartCount = updateduser.cartCount + 1;
+
+                                        updateduser.cartTotallPrice = updateduser.cartTotallPrice + product.price;
+
+                                User.findByIdAndUpdate(author, {$set : updateduser}, {new : true})
+                                    .then(user => {
+                                        const cartPrices = {
+                                            cartCount : user.cartCount,
+                                            totallPrice : user.cartTotallPrice
+                                          }
+                                        res.status(200).json({
+                                            cartPrices
                                         })
-                                       })
-
+                                    })
+                                    .catch(error => {
+                                        res.status(500).json({
+                                            message : "Server error occurred!"
+                                        })
+                                    })
                                })
-                               .catch(err => {
-                                console.log("error to find wish data" + err.message)
+                               .catch(error => {
                                    res.status(500).json({
-                                       message : "There was an server error"
+                                       message : "Server error occurred!"
                                    })
                                })
+                       }
                   })
-                  .catch(err => {
-                      res.status(500).json({
-                        message : "There was an server error"
-                      })
+                  .catch(errror => {
+
                   })
 
     },
     getCart(req, res){
-        const userId = req.user._id
-      AddCart.find({author : userId})
+
+          const {_id, cartCount,cartTotallPrice} = req.user
+
+      AddCart.find({author : _id})
              .then(data => {
+                 console.log(data)
                 res.status(200).json({
-                    cart : data
+                    cart : data,
+                    cartPrices : {
+                        cartCount : cartCount,
+                        totallPrice : cartTotallPrice
+                    }
                 })
              })
              .catch(error => {
+                 
                 res.status(500).json({
-                    message : "There was an server error"
+                    message : error.message
                 }) 
              })
     },
     getProduct(req, res){
+        
         ProductModel.find()
                     .then(data => {
                       res.status(200).json({
-                          product : data
+                          product : data,
+                          user : "f"
                       })
                     })
                     .catch(error => {
@@ -250,7 +310,22 @@ module.exports = {
                         })
                     })
     },
-    
+    getCartActivity(req, res){
+
+        const userId = req.user._id
+
+        User.findById(userId)
+            .then(cart => {
+                res.status(200).json({
+                    cart : cart
+                })
+            })
+            .catch(error => {
+                res.status(500).json({
+                    message : "There was an server error!"
+                })
+            })
+    },
     product(req, res){
         const {id} = req.params
 
@@ -267,6 +342,80 @@ module.exports = {
                        })
                     })
 
-    }
+    },
+    getUser(req, res){
+        const userId = req.user._id
+        console.log(userId)
+       User.findOne(userId)
+           .then(user => {
+               const cartData = {
+                count : user.cartCount,
+                totallPrice : user.cartTotallPrice
+               }
+              res.status(200).json({
+                   user : cartData
+              })
+           })
+           .catch(error => {
+            console.log(error.message)
+            res.status(500).json({
+                message : "There was an sercer error!"
+            })
+           })
+    },
+    deleteCart(req, res){
+        const cartId = req.params.id.toString()
+
+        const author = req.user._id
        
+        AddCart.findByIdAndDelete({_id : cartId})
+               .then(cart => {
+
+                if(cart){
+                    const userCartList = req.user._doc.CartList;
+
+                    const index = userCartList.indexOf(cart.productId)
+                      
+                    if (index > -1) {
+                          userCartList.splice(index, 1); // 2nd parameter means remove one item only
+                      }
+
+                    const updatedUser = {...req.user._doc};
+
+                          updatedUser.CartList = userCartList;
+
+                          updatedUser.cartCount = updatedUser.cartCount - cart.qty;
+
+                          updatedUser.cartTotallPrice = updatedUser.cartTotallPrice - cart.tottalPrice
+
+                          User.findByIdAndUpdate(author, {$set : updatedUser}, {new : true})
+                              .then(user => {
+                                   return res.status(200).json({
+                                    cartPrices : {
+                                        cartCount : user.cartCount,
+                                        totallPrice : user.cartTotallPrice
+                                    }
+                                   })
+                              })
+                              .catch(error => {
+                                  return res.status(500).json({
+                                      message : "There was an server occured!"
+                                  })
+                              })
+ 
+                }else{
+
+                    return res.status(404).json({
+                        message : 'cart not found!'
+                    })
+                }  
+
+               })
+               .catch(error => {
+                   console.log(error.message)
+                   res.status(500).json({
+                       message : "server error occured!"
+                   })
+               })
+    }
 }

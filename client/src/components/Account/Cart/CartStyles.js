@@ -51,7 +51,7 @@ export const Price = styled.div`
 
 export const Span = styled.span`
      font-weight: ${(props) => props.fw};
-     display: inline-block;
+     display: block;
      margin-top: ${(props) => props.mt}rem;
 `
 
@@ -61,8 +61,10 @@ export const Trash = styled.div`
 
 export const Button = styled.button`
    line-height: 50px;
+   cursor: pointer;
   svg{
       font-size: 18px;
+      color: #ff00009c;
   }
 `
 
@@ -84,4 +86,23 @@ export const OrderButton = styled(Link)`
  color: #fff;
  padding: 1rem;
  width: 100%;
+`
+
+export const Loading = styled.h6`
+    font-size: 18px;
+    text-align: center;
+    margin: 6rem 0;
+`
+
+export const Empty = styled.span`
+ text-align: center;
+ margin: 1rem 0;
+ display: block;
+`
+
+export const Cuntinue = styled.div`
+margin-top: 2rem;
+ svg{
+ margin-right: 1rem;
+ }
 `

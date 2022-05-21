@@ -1,13 +1,13 @@
 const mongoose = require('mongoose')
 
 const AddToCart = mongoose.Schema({
-    coffeeName : {
+    name : {
         type : String,
         trim : true,
         required : true
     },
     price : {
-        type : String,
+        type : Number,
         trim : true,
         required : true
     },
@@ -16,8 +16,9 @@ const AddToCart = mongoose.Schema({
         trim : true,
         required : true
     },
+    qty : Number,
+    tottalPrice : Number,
     avatar : String,
-    createdAt  : String,
     author : mongoose.Schema.Types.ObjectId,
     productId :  mongoose.Schema.Types.ObjectId,
 

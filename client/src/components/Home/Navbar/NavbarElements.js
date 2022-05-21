@@ -15,7 +15,7 @@ export const Nav = styled.div`
   background: #5C3D2E;
   box-shadow: ${(props) =>
     props.issticky ? "0px 5px 20px rgb(0 0 0 / 15%)" : null};
-  /* position: ${(props) => (props.issticky ? "fixed" : "absolute")}; */
+  position: ${(props) => (props.issticky ? "fixed" : "")};
 `;
 
 export const NavbarContainer = styled.div`
@@ -96,6 +96,7 @@ export const Topbar = styled.div`
  background: #5C3D2E;
  border-bottom: 1px solid #837d7d54;
 padding: 1rem 0;
+transition: 0.5s;
 
 `
 export const UserAuth = styled.div`

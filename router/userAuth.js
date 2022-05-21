@@ -1,9 +1,8 @@
 const router = require('express').Router()
 
-const {register, login, createPost, createAddToCart, getProduct, product, getCart} = require('../controller/UserController')
+const {register, getCartActivity,login, createPost, createAddToCart, getProduct, product, getCart, getUser, deleteCart} = require('../controller/UserController')
 
 const authenticate = require('../authenticate')
-const { route } = require('express/lib/application')
 
 router.post('/user/register', register)
 
@@ -17,5 +16,11 @@ router.get('/user/cart',authenticate ,getCart)
 router.get("/user/product",getProduct)
 
 router.get("/user/product/:id", product)
+
+router.get("/cart/product",authenticate, getCartActivity)
+
+router.get('/user',authenticate, getUser)
+
+router.delete('/cart/product/:id',authenticate, deleteCart)
 
 module.exports = router

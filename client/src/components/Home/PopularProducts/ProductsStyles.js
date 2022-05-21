@@ -112,7 +112,8 @@ export const Button = styled.button`
   border-radius: 50%;
   margin-bottom: 5px;
   color: #fff;
-  cursor: pointer;
+  cursor: ${(props) => props.addedTolading ? "" : "pointer"};
+  
 
   &&:hover{
       background: #000 !important;

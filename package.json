@@ -31,5 +31,6 @@
     "url": "https://github.com/abuhuraira24/Coffee-Shop/issues"
   },
   "homepage": "https://github.com/abuhuraira24/Coffee-Shop#readme",
-  "description": ""
+  "description": "",
+  "proxy": "http://localhost:3000"
 }

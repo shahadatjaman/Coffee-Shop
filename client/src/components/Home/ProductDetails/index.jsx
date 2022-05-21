@@ -14,7 +14,9 @@ import { Dir } from "../../Account/MyAccount/AccountStyles";
 
 import { productAction } from '../../../store/action/productAction';
 
-const ProductDetails = ({productAction,product}) => {
+import {addToCartAction} from "../../../store/action/cartAction"
+
+const ProductDetails = ({productAction,product,addToCartAction}) => {
 
     const productId = useParams()
     
@@ -76,7 +78,13 @@ const ProductDetails = ({productAction,product}) => {
                             <Price>${data.price}.00</Price>
                         </Prices>
 
-                        <Button color="#fff" bg="#5C3D2E">Add To Cart</Button>
+                        <Button 
+                           color="#fff" 
+                           bg="#5C3D2E"
+                           onClick={() => addToCartAction(data._id)}
+                           >
+                            Add To Cart
+                        </Button>
                     </Col>
                 </Row>
             </Container>
@@ -92,4 +100,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {productAction})(ProductDetails);
+export default connect(mapStateToProps, {productAction,addToCartAction})(ProductDetails);

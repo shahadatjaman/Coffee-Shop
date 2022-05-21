@@ -5,11 +5,10 @@ import { FaAlignJustify,FaHeart,FaWeightHanging } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { Col, Container, Row, TitleH6 } from "../../Utils/Elements";
 
-import {Link} from "react-router-dom"
 
 import { connect } from "react-redux";
 
-const Navbar = ({isLogged}) => {
+const Navbar = ({isLogged,cart}) => {
 
     const [open, setOpen] = useState(false)
     const [sticky, setSticky] = useState(false)
@@ -36,7 +35,6 @@ const Navbar = ({isLogged}) => {
 
     const {isAuthenticated} = isLogged
 
-   console.log(isAuthenticated)
     return (
         <>
         <Topbar>
@@ -108,13 +106,13 @@ const Navbar = ({isLogged}) => {
                   </NavItem>
               </NavbarMenu>
               <UserActivity>
-                  <Wishlist>
+                  {/* <Wishlist>
                      <FaHeart />
                     <Span>0</Span>
-                  </Wishlist>
+                  </Wishlist> */}
                   <AddToCart>
                       <FaWeightHanging />
-                      <Span>0</Span>
+                      <Span>00</Span>
                   </AddToCart>
               </UserActivity>
           </NavbarContainer>
@@ -124,8 +122,10 @@ const Navbar = ({isLogged}) => {
 }
 
 const mapStateToProps = state => {
+
     return {
-        login : state.login
+        login : state.login,
+        cart : state.cart
     }
 }
 

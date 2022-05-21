@@ -26,12 +26,14 @@ const UserModel = new mongoose.Schema({
         trim : true,
         required : true
     },
-    wishList : {
+    CartList : {
         type : [{
             type : mongoose.Schema.Types.ObjectId,
             ref : "WishList"
         }]
-    }
+    },
+    cartCount : Number,
+    cartTotallPrice : Number
 })
 
 const User = mongoose.model("users", UserModel)

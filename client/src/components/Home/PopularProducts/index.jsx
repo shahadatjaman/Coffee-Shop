@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 
 import { addToCartAction } from '../../../store/action/cartAction';
 
-const PopularProducts = ({auth,addToCartAction,login}) => {
+const PopularProducts = ({auth,addToCartAction,login, cart}) => {
 
     const navigate = useNavigate()
     
@@ -30,7 +30,7 @@ const PopularProducts = ({auth,addToCartAction,login}) => {
         }
         // addToCartAction(id)
     }
-
+    const {addedTolading} = cart;
     return (
         <ProductWrapper>
             <Container>
@@ -91,9 +91,21 @@ const PopularProducts = ({auth,addToCartAction,login}) => {
                                     <AiFillStar />
                                     </Li>
                                 </Stars>
-                                <Button onClick={() => addCart(pro._id)}>
+                                {/* <Button onClick={() => addCart(pro._id)}>
                                         <AiOutlineShoppingCart />
-                                 </Button>
+
+                                 </Button> */}
+                                 {addedTolading ? (
+                                     <Button disabled addedTolading="true" onClick={() => addCart(pro._id)}>
+                                     <AiOutlineShoppingCart />
+
+                              </Button>
+                                 ) : (
+                                    <Button onClick={() => addCart(pro._id)}>
+                                    <AiOutlineShoppingCart />
+
+                             </Button>
+                                 )}
                                 </StarAndCart>
                                <H4>{pro.coffeeName} </H4>
                                <Prices>
@@ -128,7 +140,8 @@ const PopularProducts = ({auth,addToCartAction,login}) => {
 const mapStateToProps = (state)=> {
     return {
         auth : state.auth,
-        login : state.login
+        login : state.login,
+        cart : state.cart
     }
 }
 

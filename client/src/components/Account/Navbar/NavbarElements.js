@@ -15,7 +15,7 @@ export const Nav = styled.div`
   background: ${(props) => (props.issticky ? "#EDCDBB" : "#EDCDBB")};
   box-shadow: ${(props) =>
     props.issticky ? "0px 5px 20px rgb(0 0 0 / 15%)" : null};
-  /* position: ${(props) => (props.issticky ? "fixed" : "absolute")}; */
+  position: ${(props) => (props.issticky ? "fixed" : "")};
 `;
 
 export const NavbarContainer = styled.div`

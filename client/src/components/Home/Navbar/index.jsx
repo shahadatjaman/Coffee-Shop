@@ -11,7 +11,7 @@ import {logout} from "../../../store/action/authAction"
 
 import {Navigate} from 'react-router-dom'
 
-const Navbar = ({auth,isLogged,logout}) => {
+const Navbar = ({auth,isLogged,logout, cart}) => {
 
     const [open, setOpen] = useState(false)
     const [sticky, setSticky] = useState(false)
@@ -36,7 +36,8 @@ const Navbar = ({auth,isLogged,logout}) => {
    
     window.addEventListener('scroll', isHeaderSticky)
 
-    return (
+
+    return (  
         <>
         <Topbar>
             <Container>
@@ -122,13 +123,16 @@ const Navbar = ({auth,isLogged,logout}) => {
                   </NavItem>
               </NavbarMenu>
               <UserActivity>
-                  <Wishlist>
-                     <FaHeart />
-                    <Span>0</Span>
-                  </Wishlist>
+    
                   <AddToCart>
                       <FaWeightHanging />
-                      <Span>0</Span>
+                     
+                          {cart.cartPrices !== undefined && cart.cartPrices && Object.keys(cart.cartPrices).length > 0 && (
+                              <Span>
+                                {cart.cartPrices.cartCount}
+                              </Span>
+                          )}
+                       
                   </AddToCart>
               </UserActivity>
           </NavbarContainer>
@@ -138,8 +142,10 @@ const Navbar = ({auth,isLogged,logout}) => {
 }
 
 const mapStateToProps = state => {
+    console.log(state)
     return {
-        auth : state.auth
+        auth : state.auth,
+        cart : state.cart
     }
 }
 
