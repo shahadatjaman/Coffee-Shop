@@ -19,7 +19,7 @@ require('./passport')(passport)
 
 app.use('/api', require('./router/userAuth'))
 
-const PORT = 4000
+const PORT = process.env.PORT || 4000;
 
 mongoose.connect(MONGODB)
         .then(() => {
