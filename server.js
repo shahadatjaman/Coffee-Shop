@@ -1,5 +1,6 @@
 const express = require('express')
 
+const dotenv = require("dotenv")
 
 const mongoose = require('mongoose')
 
@@ -14,7 +15,7 @@ app.use(bodyParser.urlencoded({extended : false}))
 
 app.use(bodyParser.json())
 
-require('dotenv').config()
+dotenv.config()
 
 app.use(passport.initialize())
 require('./passport')(passport)
