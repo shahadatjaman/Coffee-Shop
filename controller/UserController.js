@@ -1,5 +1,7 @@
 const User = require('../model/RegisterModel')
 
+const {PRIVET_KEY} = require('../config')
+
 const bcrypt = require('bcrypt')
 
 const jwt = require('jsonwebtoken')
@@ -65,7 +67,7 @@ module.exports = {
                                         lastName,
                                         email,
                                         phone
-                                    },process.env.PRIVET_KEY, {expiresIn : "72h"})
+                                    },PRIVET_KEY, {expiresIn : "72h"})
                                       res.status(200).json({
                                           token : `Bearer ${token}`,
 
@@ -123,7 +125,7 @@ module.exports = {
                             firstName : user.firstName,
                             lastName : user.lastName
 
-                        },process.env.PRIVET_KEY, {expiresIn : "72h"})
+                        },PRIVET_KEY, {expiresIn : "72h"})
           
                      res.status(200).json({
                             token : `Bearer ${token}` 

@@ -1,6 +1,6 @@
 const express = require('express')
 
-const dotenv = require("dotenv")
+const {PORT, MONGODB} = require('./config')
 
 const mongoose = require('mongoose')
 
@@ -15,8 +15,6 @@ app.use(bodyParser.urlencoded({extended : false}))
 
 app.use(bodyParser.json())
 
-dotenv.config()
-
 app.use(passport.initialize())
 require('./passport')(passport)
 
@@ -28,16 +26,14 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
-const PORT = process.env.PORT || 4000;
+const PORTT = PORT || 4000;
 
-mongoose.connect(process.env.MONGODB)
+mongoose.connect(MONGODB)
         .then(() => {
             console.log('MongoDB Connected!')
-            return app.listen({port : PORT})
+            return app.listen({port : PORTT})
         })
         .then((res) => {
            
             console.log(`server is running on PORT ${PORT}`)
         })
-
-// Ami@abu#huraira@1

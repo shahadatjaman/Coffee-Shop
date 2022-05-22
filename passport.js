@@ -4,10 +4,11 @@ const ExtractJwt = require('passport-jwt').ExtractJwt
 
 const User = require('./model/RegisterModel')
 
+const {PRIVET_KEY} = require("./config")
 
 let opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = process.env.PRIVET_KEY;
+opts.secretOrKey = PRIVET_KEY;
 
 module.exports = passport => {
     passport.use(new JwtStrategy(opts, (payload, done) => {
