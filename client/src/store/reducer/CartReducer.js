@@ -10,9 +10,9 @@ const init = {
 const CartReducer = (state = init, action) => {
 
     switch (action.type) {
-
+   
         case Types.GET_CART:
-          
+            console.log(action.payload.cartItems)
             return {
                 cartData : action.payload.cartItems,
                 loading : action.payload.loading,

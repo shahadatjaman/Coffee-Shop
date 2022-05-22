@@ -22,6 +22,7 @@ export const Cart = styled.div`
   border-bottom: 2px solid #ddd;
   display: flex;
   margin-bottom: 1rem;
+  transition: .5s;
 ` 
 
 export const Image = styled.div`

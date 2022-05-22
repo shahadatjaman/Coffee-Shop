@@ -19,6 +19,7 @@ export const Row = styled.div`
     flex-wrap: wrap;
   flex-direction: ${(props) => (props.direction ? "row-reverse" : "")};
   width: 100%;
+  transition: .5s;
 `;
 export const Col = styled.div`
   max-width: ${(props) => props.w}%;
@@ -29,6 +30,7 @@ export const Col = styled.div`
   padding-left: 15px;
   margin: ${(props) => props.mlauto};
   display: ${(props) => (props.center ? "flex" : "")};
+  transition: .5s;
   @media (max-width: 991px) {
     max-width: ${(props) => props.md}%;
     display: ${(props) => (props.mdnone ? "none" : "")};
@@ -40,6 +42,7 @@ export const Col = styled.div`
   @media (max-width: 468px) {
     max-width: ${(props) => props.sm}% !important;
   }
+
 `;
 
 // Section Title

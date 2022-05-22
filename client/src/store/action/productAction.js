@@ -19,6 +19,13 @@ export const productAction = ({id}) => dispatch => {
               loading : false
             }
            })
+
+           dispatch({
+             type : Types.GET_CART,
+             payload : {
+              cartItems :  res.data.cart
+             }
+           })
  
          })
          .catch(error => {

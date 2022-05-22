@@ -19,13 +19,16 @@ require('./passport')(passport)
 
 app.use('/api', require('./router/userAuth'))
 
+const PORT = 4000
+
 mongoose.connect(MONGODB)
         .then(() => {
             console.log('MongoDB Connected!')
-            return app.listen({port : 4000})
+            return app.listen({port : PORT})
         })
         .then((res) => {
            
-            console.log(`server is running on PORT 4000`)
+            console.log(`server is running on PORT ${PORT}`)
         })
 
+// Ami@abu#huraira@1
