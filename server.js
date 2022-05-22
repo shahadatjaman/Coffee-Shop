@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {PORT, MONGODB} = require('./config')
+const { MONGODB} = require('./config')
 
 const mongoose = require('mongoose')
 
@@ -26,12 +26,12 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
-const PORTT = PORT || 4000;
+const PORT = process.env.PORT || 4000;
 
 mongoose.connect(MONGODB)
         .then(() => {
             console.log('MongoDB Connected!')
-            return app.listen({port : PORTT})
+            return app.listen({port : PORT})
         })
         .then((res) => {
            
