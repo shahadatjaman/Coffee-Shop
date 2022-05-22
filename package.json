@@ -22,7 +22,8 @@
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "engines": {
-    "node": "16.13.1"
+    "node": "16.x",
+    "yarn": "1.x"
    },
   "repository": {
     "type": "git",
