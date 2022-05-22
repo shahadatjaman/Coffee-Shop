@@ -23,7 +23,7 @@
   },
   "engines": {
     "node": "16.x",
-    "npm": "8.x"
+    "yarn": "1.x"
    },
   "repository": {
     "type": "git",
