@@ -1,10 +1,9 @@
-import {useEffect} from 'react'
 
 import {connect} from "react-redux"
 
 import {Container, Row, Col} from "../../Utils/Elements"
 
-import { Dir, LeftMenu, Li, MenuBody, MenuTitle, Wrapper, Title, Ul, Text } from "../MyAccount/AccountStyles";
+import { Dir, LeftMenu, Li, MenuBody, MenuTitle, Wrapper, Title, Ul } from "../MyAccount/AccountStyles";
 
 import {Link, NavLink} from "react-router-dom"
 

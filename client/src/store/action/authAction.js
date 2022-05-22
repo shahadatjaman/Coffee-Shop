@@ -4,7 +4,6 @@ import Axios from "axios";
 
 import decoder from "jwt-decode";
 
-import toast, { Toaster } from 'react-hot-toast';
 
 export const authRegister = (user,navigate) => dispatch => {
 

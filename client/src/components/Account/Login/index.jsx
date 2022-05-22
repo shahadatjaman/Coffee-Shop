@@ -3,7 +3,6 @@ import { Dir, LeftMenu, Li, MenuBody, MenuTitle, Wrapper, Title, Ul, Button, Tex
 
 import {NavLink} from 'react-router-dom'
 
-import Navbar from "../Navbar";
 
 import {connect} from "react-redux"
 
@@ -45,8 +44,6 @@ class Login extends React.Component {
 
         const {email, password, error} = this.state
 
-        const {loading, isTaken} = this.props.login
-        console.log(error)
         return (
             <>
             {/* <Navbar /> */}

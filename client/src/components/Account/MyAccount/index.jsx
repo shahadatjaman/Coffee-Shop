@@ -1,13 +1,12 @@
-import { Dir, LeftMenu, Li, MenuBody, MenuTitle, Wrapper, Title, Ul, Button, Text } from "./AccountStyles";
+import { Dir, LeftMenu, Li, MenuBody, MenuTitle, Wrapper, Title, Ul } from "./AccountStyles";
 
 
 import {NavLink} from 'react-router-dom'
 
-import Navbar from "../Navbar";
 
 import {connect} from "react-redux"
 
-import {Container, Row, Col,InptGroup,Form, Label, Input, FormTitle} from "../../Utils/Elements"
+import {Container, Row, Col} from "../../Utils/Elements"
 
 import React from "react";
 

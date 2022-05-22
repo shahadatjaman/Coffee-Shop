@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react"
+import {useEffect} from "react"
 
 import {NavLink,useParams} from 'react-router-dom'
 
@@ -7,8 +7,6 @@ import {connect} from "react-redux"
 import { Image, Img, Name,ProductName, ProductDetailsWrapper, Info, Ul, Li, Span, Prices, OldPrice, Price } from "./ProductDetailsStyles";
 
 import {Container, Row, Col, Loading, Button} from "../../Utils/Elements"
-
-import one from "../../../Assets/Images/one.jpg"
 
 import { Dir } from "../../Account/MyAccount/AccountStyles";
 

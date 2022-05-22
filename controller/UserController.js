@@ -4,8 +4,6 @@ const bcrypt = require('bcrypt')
 
 const jwt = require('jsonwebtoken')
 
-const {PRIVET_KEY} = require('../config')
-
 const ProductModel = require("../model/CreateProductModel")
 
 const AddCart = require('../model/AddToCartModel')
@@ -67,7 +65,7 @@ module.exports = {
                                         lastName,
                                         email,
                                         phone
-                                    },PRIVET_KEY, {expiresIn : "72h"})
+                                    },process.env.PRIVET_KEY, {expiresIn : "72h"})
                                       res.status(200).json({
                                           token : `Bearer ${token}`,
 
@@ -125,7 +123,7 @@ module.exports = {
                             firstName : user.firstName,
                             lastName : user.lastName
 
-                        },PRIVET_KEY, {expiresIn : "72h"})
+                        },process.env.PRIVET_KEY, {expiresIn : "72h"})
           
                      res.status(200).json({
                             token : `Bearer ${token}` 

@@ -1,6 +1,5 @@
 const express = require('express')
 
-const {MONGODB} = require('./config')
 
 const mongoose = require('mongoose')
 
@@ -15,6 +14,8 @@ app.use(bodyParser.urlencoded({extended : false}))
 
 app.use(bodyParser.json())
 
+require('dotenv').config()
+
 app.use(passport.initialize())
 require('./passport')(passport)
 
@@ -28,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 4000;
 
-mongoose.connect(MONGODB)
+mongoose.connect(process.env.MONGODB)
         .then(() => {
             console.log('MongoDB Connected!')
             return app.listen({port : PORT})

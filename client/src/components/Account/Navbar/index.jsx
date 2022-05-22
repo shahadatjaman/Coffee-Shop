@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { Nav,NavbarContainer, NavbarMenu, NavItem, NavLogo, NavLink, MenuIcon, Topbar, UserAuth, Login, Register, Slash, UserActivity, Wishlist, AddToCart, Span,UserRegister, Ul, Li, Close } from "./NavbarElements";
-import { FaAlignJustify,FaHeart,FaWeightHanging } from "react-icons/fa";
+import { Nav,NavbarContainer, NavbarMenu, NavItem, NavLogo, NavLink, MenuIcon, Topbar, UserAuth, Login, Slash, UserActivity, AddToCart, Span } from "./NavbarElements";
+import { FaAlignJustify,FaWeightHanging } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { Col, Container, Row, TitleH6 } from "../../Utils/Elements";
 

@@ -1,10 +1,10 @@
-import {Navigate, useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 
 import {connect} from 'react-redux'
 
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
-import { Cart, Img, ProductWrapper, Image, CartContent, H4, Stars, Li, Prices, Price, Dis, Old, DisDiv, Sale,Span, Buttons, Button, StarAndCart } from "./ProductsStyles";
+import { Cart, Img, ProductWrapper, Image, CartContent, H4, Stars, Li, Prices, Price, Old, DisDiv,Span, Button, StarAndCart } from "./ProductsStyles";
 
 
 import {Container, Row, Col, Title, TitleH1} from "../../Utils/Elements"
