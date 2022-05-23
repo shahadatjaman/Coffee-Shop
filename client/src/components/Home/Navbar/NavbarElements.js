@@ -8,13 +8,14 @@ export const Nav = styled.div`
   border-bottom: 1px solid #ffffff26;
   z-index: 99;
   transition: 0.5s;
+  padding: 2rem 0;
   @media (max-width: 991px) {
     background: #fff;
     z-index: 99;
   }
   background: #fff;
   box-shadow: ${(props) =>
-    props.issticky ? "0px 5px 20px rgb(0 0 0 / 15%)" : null};
+  props.issticky ? "0px 5px 20px rgb(0 0 0 / 15%)" : null};
   position: ${(props) => (props.issticky ? "fixed" : "")};
   border-bottom: 2px solid #ddd;
 `;
@@ -48,7 +49,7 @@ export const NavLogo = styled(NavLinks)`
 
 export const LogoBar = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 `
 
@@ -70,6 +71,9 @@ export const MenuIcon = styled.span`
 `;
 
 export const NavbarMenu = styled.ul`
+  padding-left : 2rem;
+  position: absolute;
+  visibility: ${(props) => !props.toggle && "hidden"};
   @media (max-width: 991px) {
     width: 100%;
     position: absolute;
@@ -87,6 +91,7 @@ export const NavbarMenu = styled.ul`
       }
     }
   }
+  
 `;
 
 export const NavItem = styled.li`
@@ -141,7 +146,9 @@ export const Slash = styled.span`
 `
 
 export const UserActivity = styled.div`
-   display: flex;
+    display: flex;
+    justify-content: end;
+
 `
 
 export const Wishlist = styled.span`
@@ -269,4 +276,40 @@ export const Button = styled.button`
   svg{
     margin-top: 7px;
   }
+`
+
+export const SearchPanel = styled.div`
+  display:  ${(props) => props.smblock && "none"};
+  position: relative;
+  @media (max-width : 768px) {
+    display:  ${(props) => props.smnone && "none"};
+    display:  ${(props) => props.smblock && "block"};
+    margin-top: 1rem;
+  }
+   
+`;
+
+export const SearchInput = styled.input`
+    width: 100%;
+    padding: 11px 60px 11px 22px;
+    border: 0;
+    background-color: #f0f0f0;
+    color: #777777;
+    font-size: 13px;
+    letter-spacing: 0px;
+    height: 40px;
+    text-transform: capitalize;
+    border-radius: 25px;
+    
+`
+
+export const SearchIcon = styled.button`
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #000;
+    color: #fff;
+    height: 100%;
+    width: 10%;
+    border-radius: 0px 25px 25px 0px;
 `

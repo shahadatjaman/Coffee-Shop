@@ -32,7 +32,7 @@ button{
    border: none
 }
 input:focus{
-    border: 1px solid rgba(212, 63, 141, 0.1);
+    border: 1px solid #ddd;
    outline: none;
 
 }

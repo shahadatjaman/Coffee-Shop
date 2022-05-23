@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 
-import { Nav,NavbarContainer, NavbarMenu, NavItem, NavLogo, NavLink, MenuIcon, Topbar, UserAuth, Slash, UserActivity, AddToCart, Span, Button, MyCart, H5, User, AccountMenu, Ul, Li, LogoBar} from "./NavbarElements";
-import { FaAlignJustify,FaUserAlt } from "react-icons/fa";
+import { Nav,NavbarContainer, NavbarMenu, NavLogo, MenuIcon, UserActivity, AddToCart, Span, Button, MyCart, H5, User, AccountMenu, Ul, Li, LogoBar, SearchPanel, SearchInput, SearchIcon} from "./NavbarElements";
+import { FaAlignJustify,FaUserAlt,FaSearch } from "react-icons/fa";
 import { AiOutlineClose,AiOutlineShoppingCart } from "react-icons/ai";
 import {connect} from "react-redux"
 
 import {logout} from "../../../store/action/authAction"
+
 import { Link } from "react-router-dom";
+
+import {Col, Row, Container} from "../../Utils/Elements"
 
 
 const Navbar = ({auth,isLogged,logout, cart,login}) => {
@@ -55,50 +58,86 @@ const Navbar = ({auth,isLogged,logout, cart,login}) => {
     return (  
         <>
          <Nav issticky={sticky}>
-          <NavbarContainer>
-              <LogoBar>
-                <MenuIcon>
-                    {open ? <AiOutlineClose onClick={() => isClose()} /> : <FaAlignJustify onClick={() => isOpen()} />}
-                </MenuIcon>
-                <NavLogo to='/'>
-                    .COFFEE
-                </NavLogo>
-              </LogoBar>
+          <Container>
+             <Row>
+              <Col w="25" sm="50">
+                <LogoBar>
+                    <MenuIcon>
+                        {open ? <AiOutlineClose onClick={() => isClose()} /> : <FaAlignJustify onClick={() => isOpen()} />}
+                    </MenuIcon>
+                    <NavLogo to='/'>
+                        .COFFEE
+                    </NavLogo>
+                </LogoBar>
+              </Col>
               
               <NavbarMenu  toggle={open}>
-                  <NavItem issticky={sticky}>
-                      <NavLink smooth  to='#'>
-                          Home
-                      </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink smooth  to="#about">
-                          About
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink smooth  to="#products">
-                          Products
-                     </NavLink>
-                  </NavItem>
-                  <NavItem>
-                     <NavLink smooth  to="#tstimonial">
-                          Tstimonial
-                     </NavLink>
-                  </NavItem>
+              {isAuthenticated ? "":(
+                                  <Li>
+                                      <Link to="/account/register">
+                                        Sign in
+                                      </Link>
+                                  </Li>
+                              )}
+                              {isAuthenticated ? "":(
+                                  <Li onClick={() => isCloseAccount()}>
+                                      <Link to="/account/register">
+                                        Register
+                                      </Link>
+                                  </Li>
+                              )}
+                             
+                              {isAuthenticated ? (
+                                  <Li onClick={() => isCloseAccount()}>
+                                      <Link to="/account">
+                                      My Account
+                                      </Link>
+                                  </Li>
+                              ) : ""}
+ 
+                           {isAuthenticated ? (
+                                  <Li onClick={() => isCloseAccount()}>
+                                      {login.user._id && (<Link to={`/account/cart/${login.user._id}`}>
+                                         Cart
+                                      </Link>)}
+                                  </Li>
+                              ) : ""}
+                               {isAuthenticated ? (
+                                  <Li onClick={() => isCloseAccount()}>
+                                      <Link to="/account/order">
+                                         Order
+                                      </Link>
+                                  </Li>
+                              ) : ""}
+
+                            {isAuthenticated ? (
+                                  <Li onClick={() => isCloseAccount()}>
+                                      <Button onClick={() => logout()}>
+                                         Log out
+                                      </Button>
+                                  </Li>
+                              ) : ""}
+
+                              {isAuthenticated ? "":(
+                                  <Li onClick={() => isCloseAccount()}>
+                                      <Link to="/account/login">
+                                        Log in
+                                      </Link>
+                                  </Li>
+                              )}
             
-          
-                  <NavItem>
-                     <NavLink smooth  to="#">
-                          FAQ
-                      </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink smooth  to="#">
-                          Contract
-                    </NavLink>
-                  </NavItem>
               </NavbarMenu>
+             
+             <Col w="50" none="true">
+                <SearchPanel smnone="true">
+                    <SearchInput type="search" name='search' placeholder="Search Here" />
+                    <SearchIcon>
+                     <FaSearch />
+                  </SearchIcon>
+                </SearchPanel>
+             </Col>
+              
+              <Col w="25" sm="50">
               <UserActivity>
                   <User>
                       <Button>
@@ -189,8 +228,21 @@ const Navbar = ({auth,isLogged,logout, cart,login}) => {
                               </H5>
                           )}
                   </MyCart>
-              </UserActivity>   
-          </NavbarContainer>
+              </UserActivity> 
+              </Col> 
+
+              </Row>
+              <Row>
+                  <Col w="100">
+                    <SearchPanel smblock="true">
+                    <SearchInput type="search" name='search' placeholder="Search Here" />
+                    <SearchIcon>
+                        <FaSearch />
+                    </SearchIcon>
+                    </SearchPanel>
+                  </Col>
+              </Row>
+          </Container>
          </Nav>
         </>
     )
