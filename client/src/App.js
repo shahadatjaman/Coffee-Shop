@@ -45,11 +45,20 @@ function App({getProduct, login,getCartAction}) {
     
   },[getProduct])
 
-  const {_id} = login.user
+  
+  // console.log(login.user._id)
+  // if(login.user._id){
+  //   const {_id} = login.user
+
+  //   return _id
+  // }
+
 
   useEffect(() => {
-    getCartAction(_id)
-},[getCartAction,_id])
+    if(login.user){
+      getCartAction(login.user._id)
+    }
+},[getCartAction,login])
 
   const getUser = ()  => {
     Axios.get('/api/user', {

@@ -50,7 +50,6 @@ const Navbar = ({auth,isLogged,logout, cart,login}) => {
     window.addEventListener('scroll', isHeaderSticky)
 
     
-    const {_id} = login.user
 
     const {isAuthenticated} = isLogged
     return (  
@@ -140,9 +139,9 @@ const Navbar = ({auth,isLogged,logout, cart,login}) => {
  
                            {isAuthenticated ? (
                                   <Li onClick={() => isCloseAccount()}>
-                                      <Link to={`/account/cart/${_id}`}>
+                                      {login.user._id && (<Link to={`/account/cart/${login.user._id}`}>
                                          Cart
-                                      </Link>
+                                      </Link>)}
                                   </Li>
                               ) : ""}
                                {isAuthenticated ? (
