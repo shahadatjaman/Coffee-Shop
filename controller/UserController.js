@@ -275,7 +275,9 @@ module.exports = {
     },
     getCart(req, res){
 
-          const {_id, cartCount,cartTotallPrice} = req.user
+          const {cartCount,cartTotallPrice} = req.user
+
+          const _id = req.params.id
 
       AddCart.find({author : _id})
              .then(data => {

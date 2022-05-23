@@ -45,9 +45,11 @@ function App({getProduct, login,getCartAction}) {
     
   },[getProduct])
 
+  const {_id} = login.user
+
   useEffect(() => {
-    getCartAction()
-},[getCartAction])
+    getCartAction(_id)
+},[getCartAction,_id])
 
   const getUser = ()  => {
     Axios.get('/api/user', {
@@ -73,7 +75,9 @@ function App({getProduct, login,getCartAction}) {
   useEffect(() => {
     getUser()
   }, [])
+
   
+
 
   return (
     <>
@@ -98,7 +102,7 @@ function App({getProduct, login,getCartAction}) {
           <Account />
         </PrivateRoute>
       }/>
-      <Route  path="/account/cart" element={
+      <Route  path="/account/cart/:id" element={
         <PrivateRoute dirLink="/account/login">
           <AddToCart />
         </PrivateRoute>

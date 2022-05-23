@@ -9,10 +9,10 @@ export const Nav = styled.div`
   z-index: 99;
   transition: 0.5s;
   @media (max-width: 991px) {
-    background: #5C3D2E;
+    background: #fff;
     z-index: 99;
   }
-  background: #5C3D2E;
+  background: #fff;
   box-shadow: ${(props) =>
     props.issticky ? "0px 5px 20px rgb(0 0 0 / 15%)" : null};
   position: ${(props) => (props.issticky ? "fixed" : "")};
@@ -35,14 +35,21 @@ export const NavbarContainer = styled.div`
 export const NavLogo = styled(NavLinks)`
   font-size: 32px;
   font-weight: 600;
-  color: #fff;
+  color: #000;
   @media (max-width: 991px) {
-    color: #fff;
+    color: #000;
   }
 `;
 
+export const LogoBar = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
 export const MenuIcon = styled.span`
   display: none;
+  margin-right: 1rem;
   @media (max-width: 991px) {
     display: block;
     svg {
@@ -83,7 +90,7 @@ export const NavLink = styled(HashLink)`
   font-size: 16px;
   margin-left: 2rem;
   font-weight: 400;
-  color: #fff;
+  color: #000;
   @media (max-width: 991px) {
     margin-bottom: 1rem;
     font-weight: 500;
@@ -147,16 +154,15 @@ export const Wishlist = styled.span`
 export const AddToCart = styled.span`
  width: 40px;
  height: 40px;
- background: #fff;
  border-radius: 50%;
  display: flex;
  justify-content: center;
  align-items: center;
- border: 2px dashed #dddd;
  position: relative;
  cursor: pointer;
  svg{
-   color: green
+   color: #000;
+   font-size: 34px;
  }
 
 `
@@ -166,14 +172,13 @@ export const Span = styled.span`
   color: #000;
   left: 0;
   top: -10px;
-  background: #fff;
- border-radius: 50%;
   width: 50%;
   height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  font-weight: 700;
 `
 
 export const UserRegister = styled.div`
@@ -196,10 +201,57 @@ export const Ul = styled.ul`
 export const Li = styled.li`
  padding-bottom: 1rem;
  cursor: pointer;
+ button{
+  font-size: 16px;
+ }
 `
 
 export const Close = styled.span``
 
 export const MyAccount = styled.span`
  color: #fff;
+`
+
+export const MyCart = styled.div``
+
+export const H5 = styled.h5`
+  color: #000;
+  margin-left: 1rem;
+  margin-bottom: ${(props) => props.mb}rem;
+  font-size: ${(props) => props.fs}px;
+  font-weight: ${(props) => props.fw};
+
+`
+
+export const User = styled.div`
+    position: relative;
+ button{ 
+    display: inline-block;
+    display: inline-block;
+    line-height: 37px;
+    border-right: 1px solid #ffffff8c;
+    padding-right: 1rem;
+
+   svg{
+     color: #000;
+     font-size: 26px;
+   }
+ }
+`
+
+export const AccountMenu = styled.div`
+    position: absolute;
+    right: 50%;
+    top: 135%;
+    width: 220px;
+    height: ${(props) => props.account ? "200px" : "0"};
+    background: #fff;
+    border: ${(props) => props.account ? "3px solid #ddddddb8" : "0px solid #ddddddb8"};
+    transition : .5s;
+    overflow: hidden;
+    z-index: 9;
+`
+
+export const Button = styled.button`
+  cursor: pointer;
 `

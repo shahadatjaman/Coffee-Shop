@@ -106,4 +106,16 @@ margin-top: 2rem;
  svg{
  margin-right: 1rem;
  }
+ span{
+   display: inline-block;
+ }
+
+ @media (max-width: 768px) {
+   span{
+     display: inline-block;
+   }
+ }
+ @media (max-width: 768px) {
+   margin-bottom: 2rem;
+ }
 `

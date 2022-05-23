@@ -34,16 +34,17 @@ const CartReducer = (state = init, action) => {
         }
 
         case Types.ADD_TO_CART : 
-
+           state.cartPrices = action.payload.cartPrices;
+           state.addedTolading = action.payload.loading
         return {
-           cartPrices : action.payload.cartPrices,
-           addedTolading : action.payload.loading
+        //    cartPrices : action.payload.cartPrices,
+        //    addedTolading : action.payload.loading
+        ...state
         }
        case Types.ADDED_TO_LOADING :
 
        return {
            addedTolading : action.payload.loading,
-           cartPrice : {}
        }
        
        case Types.DELETE_CART : 

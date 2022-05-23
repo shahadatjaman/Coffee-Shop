@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 
-import { Nav,NavbarContainer, NavbarMenu, NavItem, NavLogo, NavLink, MenuIcon, Topbar, UserAuth, Slash, UserActivity, AddToCart, Span, MyAccount} from "./NavbarElements";
-import { FaAlignJustify,FaWeightHanging } from "react-icons/fa";
-import { AiOutlineClose } from "react-icons/ai";
-import { Button, Col, Container, Row, TitleH6 } from "../../Utils/Elements";
-import { Link } from "react-router-dom";
+import { Nav,NavbarContainer, NavbarMenu, NavItem, NavLogo, NavLink, MenuIcon, Topbar, UserAuth, Slash, UserActivity, AddToCart, Span, Button, MyCart, H5, User, AccountMenu, Ul, Li, LogoBar} from "./NavbarElements";
+import { FaAlignJustify,FaUserAlt } from "react-icons/fa";
+import { AiOutlineClose,AiOutlineShoppingCart } from "react-icons/ai";
 import {connect} from "react-redux"
 
 import {logout} from "../../../store/action/authAction"
+import { Link } from "react-router-dom";
 
-import {Navigate} from 'react-router-dom'
 
-const Navbar = ({auth,isLogged,logout, cart}) => {
+const Navbar = ({auth,isLogged,logout, cart,login}) => {
 
     const [open, setOpen] = useState(false)
     const [sticky, setSticky] = useState(false)
+    const [account, setAccount] = useState({
+        istrue : false
+    })
     
 
     const isOpen = () => {
@@ -23,6 +24,18 @@ const Navbar = ({auth,isLogged,logout, cart}) => {
     const isClose = () => {
         setOpen(false)
     }
+
+    const isOpenAccount = () => {
+        setAccount({
+            istrue : true
+        })
+    }
+    const isCloseAccount = () => {
+        setAccount({
+            istrue : false
+        })
+    }
+
     const isHeaderSticky = () => {
        if(window.scrollY >= 400){
            setSticky(true)
@@ -36,58 +49,23 @@ const Navbar = ({auth,isLogged,logout, cart}) => {
    
     window.addEventListener('scroll', isHeaderSticky)
 
+    
+    const {_id} = login.user
 
+    const {isAuthenticated} = isLogged
     return (  
         <>
-        <Topbar>
-            <Container>
-                <Row>
-                    <Col w="50">
-                        <TitleH6>
-                          Get Special 27% Discount On Ice Cream Cone
-                        </TitleH6>
-                    </Col>
-                    <Col w="50">
-                        <UserAuth>
-                          
-                            {isLogged.isAuthenticated ? (
-                               <>
-                               <Button color="#000" bg="#fff" onClick={() => {
-                                   logout(Navigate)
-                               }}>Logout</Button>
-                               <Slash>
-                                   
-                                   </Slash> 
-                                 <Link to="/account">
-                                       
-                                       <MyAccount>
-                                           My Account
-                                       </MyAccount>
-                                 </Link>
-                                </>
-                            ) : (
-                                <>
-                               <NavLink to="/account/login">Login </NavLink> 
-                               <Slash>
-                                   
-                               </Slash> 
-                               <NavLink to="/account/register">  Registerr </NavLink>
-                               </>
-                            )}
-    
-                        </UserAuth>
-                    </Col>
-                </Row>
-            </Container>
-        </Topbar>
          <Nav issticky={sticky}>
           <NavbarContainer>
-              <NavLogo to='/'>
-                  .COFFEE
-              </NavLogo>
-              <MenuIcon>
-                {open ? <AiOutlineClose onClick={() => isClose()} /> : <FaAlignJustify onClick={() => isOpen()} />}
-              </MenuIcon>
+              <LogoBar>
+                <MenuIcon>
+                    {open ? <AiOutlineClose onClick={() => isClose()} /> : <FaAlignJustify onClick={() => isOpen()} />}
+                </MenuIcon>
+                <NavLogo to='/'>
+                    .COFFEE
+                </NavLogo>
+              </LogoBar>
+              
               <NavbarMenu  toggle={open}>
                   <NavItem issticky={sticky}>
                       <NavLink smooth  to='#'>
@@ -123,9 +101,79 @@ const Navbar = ({auth,isLogged,logout, cart}) => {
                   </NavItem>
               </NavbarMenu>
               <UserActivity>
+                  <User>
+                      <Button>
+                        {account.istrue ? (
+                            <>
+                              <FaUserAlt onClick={() => isCloseAccount()} />
+                            </>
+                        ) : (
+                            <>
+                             <FaUserAlt onClick={() => isOpenAccount()} />
+                            </>
+                        )}
+                      </Button>
+                      <AccountMenu account={account.istrue}>
+                          <Ul>
+                              {isAuthenticated ? "":(
+                                  <Li>
+                                      <Link to="/account/register">
+                                        Sign in
+                                      </Link>
+                                  </Li>
+                              )}
+                              {isAuthenticated ? "":(
+                                  <Li onClick={() => isCloseAccount()}>
+                                      <Link to="/account/register">
+                                        Register
+                                      </Link>
+                                  </Li>
+                              )}
+                             
+                              {isAuthenticated ? (
+                                  <Li onClick={() => isCloseAccount()}>
+                                      <Link to="/account">
+                                      My Account
+                                      </Link>
+                                  </Li>
+                              ) : ""}
+ 
+                           {isAuthenticated ? (
+                                  <Li onClick={() => isCloseAccount()}>
+                                      <Link to={`/account/cart/${_id}`}>
+                                         Cart
+                                      </Link>
+                                  </Li>
+                              ) : ""}
+                               {isAuthenticated ? (
+                                  <Li onClick={() => isCloseAccount()}>
+                                      <Link to="/account/order">
+                                         Order
+                                      </Link>
+                                  </Li>
+                              ) : ""}
+
+                            {isAuthenticated ? (
+                                  <Li onClick={() => isCloseAccount()}>
+                                      <Button onClick={() => logout()}>
+                                         Log out
+                                      </Button>
+                                  </Li>
+                              ) : ""}
+
+                              {isAuthenticated ? "":(
+                                  <Li onClick={() => isCloseAccount()}>
+                                      <Link to="/account/login">
+                                        Log in
+                                      </Link>
+                                  </Li>
+                              )}
+                          </Ul>
+                      </AccountMenu>
+                  </User>
     
                   <AddToCart>
-                      <FaWeightHanging />
+                      <AiOutlineShoppingCart />
                      
                           {cart.cartPrices !== undefined && cart.cartPrices && Object.keys(cart.cartPrices).length > 0 && (
                               <Span>
@@ -134,7 +182,15 @@ const Navbar = ({auth,isLogged,logout, cart}) => {
                           )}
                        
                   </AddToCart>
-              </UserActivity>
+                  <MyCart>
+                      <H5 mb="0.5" fs="20" fw="400">My Cart</H5>
+                      {cart.cartPrices !== undefined && cart.cartPrices && Object.keys(cart.cartPrices).length > 0 && (
+                              <H5 fw="900">
+                                ${cart.cartPrices.totallPrice}
+                              </H5>
+                          )}
+                  </MyCart>
+              </UserActivity>   
           </NavbarContainer>
          </Nav>
         </>
@@ -142,10 +198,10 @@ const Navbar = ({auth,isLogged,logout, cart}) => {
 }
 
 const mapStateToProps = state => {
-    console.log(state)
     return {
         auth : state.auth,
-        cart : state.cart
+        cart : state.cart,
+        login : state.login
     }
 }
 

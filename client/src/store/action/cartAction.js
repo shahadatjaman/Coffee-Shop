@@ -8,7 +8,7 @@ import Axios from "axios";
 
 const token = localStorage.getItem("auth_token");
 
-export const getCartAction = () => dispatch => {
+export const getCartAction = (_id) => dispatch => {
 
     dispatch({
         type : Types.CART_LOADING,
@@ -18,13 +18,12 @@ export const getCartAction = () => dispatch => {
     })
 
     
-    Axios.get("/api/user/cart",{
+    Axios.get(`/api/user/cart/${_id}`,{
         headers : {
             Authorization : token
         }
     })
          .then(res => {
-             console.log(res.data)
             dispatch({
                 type : Types.GET_CART,
                 payload : {
@@ -59,7 +58,6 @@ export const addToCartAction = (id) => dispatch  => {
         }
     })
     .then(res => {
-        console.log(res.data)
         dispatch({
             type : Types.ADD_TO_CART, 
             payload : {
@@ -81,7 +79,6 @@ export const getUser = () => dispatch => {
            headers :  token
          })
       .then(user => {
-          console.log(user.data.user)
          dispatch({
              type : Types.USER,
              payload : {
@@ -101,7 +98,6 @@ export const deleteCart = (id) => dispatch => {
         }
         })
          .then(res => {
-             console.log(res)
             dispatch({
                 type : Types.DELETE_CART,
                 payload : {

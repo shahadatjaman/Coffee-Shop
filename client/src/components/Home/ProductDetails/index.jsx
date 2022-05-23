@@ -92,7 +92,7 @@ const ProductDetails = ({productAction,product,addToCartAction}) => {
 }
 
 const mapStateToProps = state => {
-
+     console.log(state)
     return {
         product : state.product
     }

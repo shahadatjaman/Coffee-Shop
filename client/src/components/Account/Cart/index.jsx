@@ -17,6 +17,8 @@ import { getCartAction,deleteCart } from "../../../store/action/cartAction";
 
 
 const AddToCart = ({getCartAction,cart,login,deleteCart}) => {
+
+    const {_id} = login.user
        
     return (
         <>
@@ -34,7 +36,7 @@ const AddToCart = ({getCartAction,cart,login,deleteCart}) => {
             </Container>
            <Container>
                <Row>
-                   <Col w="25">
+                   <Col w="25" md="25" none="true">
                        <LeftMenu>
                           <MenuTitle>
                               <Title>
@@ -47,8 +49,8 @@ const AddToCart = ({getCartAction,cart,login,deleteCart}) => {
                                     <NavLink to="/account">My Account </NavLink>
                                    </Li>
                                    <Li>
-                                       <NavLink to="/account/cart">
-                                       Cart List
+                                       <NavLink to= {`/account/cart/${_id}`}>
+                                         Cart List
                                        </NavLink>
                                    </Li>
                                    <Li>Order History</Li>
@@ -56,7 +58,7 @@ const AddToCart = ({getCartAction,cart,login,deleteCart}) => {
                            </MenuBody>
                        </LeftMenu>
                    </Col>
-                   <Col w="50">
+                   <Col w="50" md="50" sm="100">
                        <CartWrapper>
                          <CartTitle>
                           <H3>Shopping Cart</H3>
@@ -117,7 +119,7 @@ const AddToCart = ({getCartAction,cart,login,deleteCart}) => {
                            </Span>
                        </Cuntinue>
                    </Col>
-                   <Col w="25">
+                   <Col w="25" md="25" sm="100">
                       <CheckOut>
                           
                           <Items mb="1">
