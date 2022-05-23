@@ -58,7 +58,8 @@ export const Span = styled.span`
      display: block;
      margin-top: ${(props) => props.mt}rem;
      @media (max-width : 576px) {
-    display: ${(props) => props.smnone ? "none" : ""};
+      display: ${(props) => props.smnone ? "none" : ""};
+      display: ${(props) => props.smblock ? "inline-block" : ""};
   }
 `
 

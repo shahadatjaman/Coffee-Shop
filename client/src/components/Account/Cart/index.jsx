@@ -70,19 +70,19 @@ const AddToCart = ({getCartAction,cart,login,deleteCart}) => {
                                    return (
                                       <Cart key={data._id}>
                                       <Row>
-                                          <Col w="50">
+                                          <Col w="40">
                                           <Image>
                                               <Img src={require(`../../../Assets/Images/${data.avatar === undefined ? "" : data.avatar}`)} alt="one"/>
                                           </Image>
                                           </Col>
                                           
-                                          <Col w="20">
+                                          <Col w="30">
                                               <CartName>
-                                              <H5>{data.coffeeName}</H5>
+                                              <H5>{data.name}</H5>
                                               
                                               <Price>
                                                   <Span mt="1" fw="800">${data.price}.00</Span>
-                                                  <Span mt="1" fw="500"> qty : {data.qty}</Span>
+                                                  <Span smblock="true" mt="1" fw="500"> qty : {data.qty}</Span>
                                               </Price>
                                               </CartName>
                                           </Col>
