@@ -40,7 +40,7 @@ const Navbar = ({auth,isLogged,logout, cart,login}) => {
     }
 
     const isHeaderSticky = () => {
-       if(window.scrollY >= 400){
+       if(window.scrollY >= 200){
            setSticky(true)
        }else{
            setSticky(false)
