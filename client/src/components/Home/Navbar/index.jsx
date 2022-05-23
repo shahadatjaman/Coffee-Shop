@@ -182,9 +182,9 @@ const Navbar = ({auth,isLogged,logout, cart,login}) => {
                        
                   </AddToCart>
                   <MyCart>
-                      <H5 mb="0.5" fs="20" fw="400">My Cart</H5>
+                      <H5 mb="0.5" fs="20" fw="400" smnone="true">My Cart</H5>
                       {cart.cartPrices !== undefined && cart.cartPrices && Object.keys(cart.cartPrices).length > 0 && (
-                              <H5 fw="900">
+                              <H5 fw="900" smnone="true">
                                 ${cart.cartPrices.totallPrice}
                               </H5>
                           )}

@@ -49,85 +49,70 @@ const PopularProducts = ({auth,addToCartAction,login, cart}) => {
                    { product !== undefined && product.length > 0 && product?.map(((pro, index) => {
                        return (
                         <Col w="25" md="50" sm="100" key={index}>
-                        <Cart>
-                            <Image>
-                                <Link to={`/product/${pro._id}`}>
-                                  <Img src={require(`../../../Assets/Images/${pro.avatar}`)} alt="one"/>
-                                </Link>
-                                 
-                                <DisDiv>
-                                    <Span>
-                                        {pro.discount}% of
-                                    </Span>
-                                </DisDiv>
-                                {/* <Buttons>
-                                    <Button onClick={() => wishadd(pro._id)}>
-                                        
-                                        {loading ? <ClipLoader /> : <AiFillHeart />}
-                                    </Button>
-                                    <Button>
-                                        <AiOutlineEye />
-                                    </Button>
-                                    <Button>
-                                        <AiOutlineSwap />
-                                    </Button>
+                            <Cart>
+                                <Image>
+                                    <Link to={`/product/${pro._id}`}>
+                                    <Img src={require(`../../../Assets/Images/${pro.avatar}`)} alt="one"/>
+                                    </Link>
                                     
-                                </Buttons> */}
-                            </Image>
-                            <CartContent>
-                                
-                                <StarAndCart>
-                                <Stars>
-                                    <Li>
+                                    <DisDiv>
+                                        <Span>
+                                            {pro.discount}% of
+                                        </Span>
+                                    </DisDiv>
+
+                                </Image>
+                                <CartContent>
+                                    
+                                    <StarAndCart>
+                                    <Stars>
+                                        <Li>
+                                            <AiFillStar />
+                                        </Li>
+                                        <Li>
                                         <AiFillStar />
-                                    </Li>
-                                    <Li>
-                                    <AiFillStar />
-                                    </Li>
-                                    <Li>
-                                    <AiFillStar />
-                                    </Li>
-                                    <Li>
-                                    <AiFillStar />
-                                    </Li>
-                                </Stars>
-                                {/* <Button onClick={() => addCart(pro._id)}>
+                                        </Li>
+                                        <Li>
+                                        <AiFillStar />
+                                        </Li>
+                                        <Li>
+                                        <AiFillStar />
+                                        </Li>
+                                    </Stars>
+
+                                    {addedTolading ? (
+                                        <Button disabled addedTolading="true" onClick={() => addCart(pro._id)}>
                                         <AiOutlineShoppingCart />
 
-                                 </Button> */}
-                                 {addedTolading ? (
-                                     <Button disabled addedTolading="true" onClick={() => addCart(pro._id)}>
-                                     <AiOutlineShoppingCart />
+                                </Button>
+                                    ) : (
+                                        <Button onClick={() => addCart(pro._id)}>
+                                        <AiOutlineShoppingCart />
 
-                              </Button>
-                                 ) : (
-                                    <Button onClick={() => addCart(pro._id)}>
-                                    <AiOutlineShoppingCart />
-
-                             </Button>
-                                 )}
-                                </StarAndCart>
-                               <H4>{pro.coffeeName} </H4>
-                               <Prices>
-                                   <Price>${pro.price}.00</Price>
- 
-                                   <Old>${pro.oldPrice}.00</Old>
-                               </Prices>
-                            </CartContent>
-                            <Toaster  
-                            position="bottom-left"
-                            reverseOrder={false}
-                            toastOptions={{
-                                className: '',
-                                style: {
-                                  border: '1px solid #ddd',
-                                  padding: '16px',
-                                  boxShadow : 'none'
-                                },
-                              }}
-                            />
-                        </Cart>
-                    </Col>
+                                </Button>
+                                    )}
+                                    </StarAndCart>
+                                <H4>{pro.coffeeName} </H4>
+                                <Prices>
+                                    <Price>${pro.price}.00</Price>
+    
+                                    <Old>${pro.oldPrice}.00</Old>
+                                </Prices>
+                                </CartContent>
+                                <Toaster  
+                                position="bottom-left"
+                                reverseOrder={false}
+                                toastOptions={{
+                                    className: '',
+                                    style: {
+                                    border: '1px solid #ddd',
+                                    padding: '16px',
+                                    boxShadow : 'none'
+                                    },
+                                }}
+                                />
+                            </Cart>
+                        </Col>
                        )
                    }))}
                    

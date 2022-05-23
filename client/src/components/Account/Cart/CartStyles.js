@@ -16,6 +16,9 @@ export const H3 = styled.h3`
  font-size: 29px;
  font-weight : 500;
  padding: 1rem ;
+ @media (max-width : 576px) {
+  font-size: 22px;
+ }
 `
 export const Cart = styled.div`
   padding: 1rem;
@@ -54,6 +57,9 @@ export const Span = styled.span`
      font-weight: ${(props) => props.fw};
      display: block;
      margin-top: ${(props) => props.mt}rem;
+     @media (max-width : 576px) {
+    display: ${(props) => props.smnone ? "none" : ""};
+  }
 `
 
 export const Trash = styled.div`
@@ -118,4 +124,15 @@ margin-top: 2rem;
  @media (max-width: 768px) {
    margin-bottom: 2rem;
  }
+`
+
+export const Item = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+
+    @media (max-width : 576px) {
+      flex-direction: column;
+      float: right;
+    }
 `

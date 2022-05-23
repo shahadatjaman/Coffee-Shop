@@ -40,6 +40,10 @@ export const NavLogo = styled(NavLinks)`
   @media (max-width: 991px) {
     color: #000;
   }
+  @media (max-width: 991px) {
+    font-size: 22px;
+  }
+  
 `;
 
 export const LogoBar = styled.div`
@@ -56,6 +60,11 @@ export const MenuIcon = styled.span`
     svg {
       font-size: 28px;
       transition: 0.5s;
+    }
+  }
+  @media (max-width: 768px) {
+    svg{
+      font-size: 18px;
     }
   }
 `;
@@ -221,7 +230,9 @@ export const H5 = styled.h5`
   margin-bottom: ${(props) => props.mb}rem;
   font-size: ${(props) => props.fs}px;
   font-weight: ${(props) => props.fw};
-
+  @media (max-width : 991px) {
+    display: ${(props) => props.smnone ? "none" : ""};
+  }
 `
 
 export const User = styled.div`
@@ -255,4 +266,7 @@ export const AccountMenu = styled.div`
 
 export const Button = styled.button`
   cursor: pointer;
+  svg{
+    margin-top: 7px;
+  }
 `

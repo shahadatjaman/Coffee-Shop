@@ -7,7 +7,7 @@ import { Dir, LeftMenu, Li, MenuBody, MenuTitle, Wrapper, Title, Ul } from "../M
 
 import {Link, NavLink} from "react-router-dom"
 
-import { Button, Cart, CartName, CartTitle, CartWrapper, CheckOut, H3, H5, Image, Img, Items, Price, Span, Trash,OrderButton,Loading, Empty, Cuntinue } from "./CartStyles";
+import { Button, Cart, CartName, CartTitle, CartWrapper, CheckOut, H3, H5, Image, Img, Items, Price, Span, Trash,OrderButton,Loading, Empty, Cuntinue, Item } from "./CartStyles";
 
 
 import { FaTrash,FaChevronLeft } from "react-icons/fa";
@@ -70,13 +70,13 @@ const AddToCart = ({getCartAction,cart,login,deleteCart}) => {
                                    return (
                                       <Cart key={data._id}>
                                       <Row>
-                                          <Col w="20">
+                                          <Col w="50">
                                           <Image>
                                               <Img src={require(`../../../Assets/Images/${data.avatar === undefined ? "" : data.avatar}`)} alt="one"/>
                                           </Image>
                                           </Col>
                                           
-                                          <Col w="30">
+                                          <Col w="20">
                                               <CartName>
                                               <H5>{data.coffeeName}</H5>
                                               
@@ -87,19 +87,23 @@ const AddToCart = ({getCartAction,cart,login,deleteCart}) => {
                                               </CartName>
                                           </Col>
           
-                                          <Col w="25">
-                                              <Price>
-                                              <Span mt="1" fw="800">${data.tottalPrice}.00</Span>
-                                              </Price>
+                                          <Col w="30">
+                                              
+                                              <Item>
+                                                <Price>
+                                                 <Span mt="1" fw="800" smnone="true">${data.tottalPrice}.00</Span>
+                                                </Price>
+                                                <Trash>
+                                                <Button onClick={() => deleteCart(data._id)}>
+                                                  <FaTrash />
+                                                </Button>
+                                                </Trash>
+                                              </Item>
                                           </Col>
                                       
-                                          <Col w="25">
-                                              <Trash>
-                                              <Button onClick={() => deleteCart(data._id)}>
-                                                  <FaTrash />
-                                              </Button>
-                                              </Trash>
-                                          </Col>
+                                          {/* <Col w="25">
+                                              
+                                          </Col> */}
                                       
                                       </Row>
                                       </Cart>

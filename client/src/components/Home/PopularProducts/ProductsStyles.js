@@ -20,6 +20,10 @@ margin-bottom: 1rem;
 `
 export  const Image = styled.div`
  position: relative;
+ a{
+     max-width: 100%;
+     display: block;
+ }
 `
 export const Img = styled.img`
 width: 100%;
