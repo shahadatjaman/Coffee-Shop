@@ -19,6 +19,10 @@ export const Name = styled.h3`
   font-weight: 400;
   font-family: 'Poppins', sans-serif;
   color: #000000bf;
+
+  @media (max-width : 768px) {
+    margin-top: 1rem;
+  }
 `
 
 export const Info = styled.div`

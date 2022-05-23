@@ -47,7 +47,7 @@ const ProductDetails = ({productAction,product,addToCartAction}) => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col w="40">
+                    <Col w="40" md="40" sm="100">
                        {data.avatar  !== undefined && (
                             <Image>
                             <Img src={require(`../../../Assets/Images/${data.avatar === undefined ? "" : data.avatar}`)} alt="one" />
@@ -55,7 +55,7 @@ const ProductDetails = ({productAction,product,addToCartAction}) => {
                        ) }
                         
                     </Col>
-                    <Col w="60">
+                    <Col w="60" md="60" sm="100">
                         <ProductName>
                             <Name>{data.coffeeName}</Name>
                         </ProductName>

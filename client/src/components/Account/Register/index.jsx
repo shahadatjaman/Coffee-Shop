@@ -81,7 +81,7 @@ const Register = ({auth,authRegister}) => {
                 </Container>
                <Container>
                    <Row>
-                       <Col w="30">
+                       <Col w="30" md="30" none="true">
                            <LeftMenu>
                               <MenuTitle>
                                   <Title>
@@ -108,7 +108,7 @@ const Register = ({auth,authRegister}) => {
                                </MenuBody>
                            </LeftMenu>
                        </Col>
-                       <Col w="70">
+                       <Col w="70" md="70" sm="100">
                            <FormTitle>
                             Register Account
                            </FormTitle>

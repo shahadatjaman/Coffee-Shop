@@ -16,6 +16,7 @@ export const Nav = styled.div`
   box-shadow: ${(props) =>
     props.issticky ? "0px 5px 20px rgb(0 0 0 / 15%)" : null};
   position: ${(props) => (props.issticky ? "fixed" : "")};
+  border-bottom: 2px solid #ddd;
 `;
 
 export const NavbarContainer = styled.div`
@@ -246,7 +247,7 @@ export const AccountMenu = styled.div`
     width: 220px;
     height: ${(props) => props.account ? "200px" : "0"};
     background: #fff;
-    border: ${(props) => props.account ? "3px solid #ddddddb8" : "0px solid #ddddddb8"};
+    border: ${(props) => props.account ? "3px solid #ddddddb8" : "0px solid #fff"};
     transition : .5s;
     overflow: hidden;
     z-index: 9;

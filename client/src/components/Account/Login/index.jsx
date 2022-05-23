@@ -60,7 +60,7 @@ class Login extends React.Component {
                 </Container>
                <Container>
                    <Row>
-                       <Col w="30">
+                       <Col w="30" md="30" none="true">
                            <LeftMenu>
                               <MenuTitle>
                                   <Title>
@@ -87,7 +87,7 @@ class Login extends React.Component {
                                </MenuBody>
                            </LeftMenu>
                        </Col>
-                       <Col w="70">
+                       <Col w="70" md="70" sm="100">
                        <FormTitle>
                             Login Your Account
                            </FormTitle>
